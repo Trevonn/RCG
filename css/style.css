@@ -1,0 +1,32 @@
+body {
+	background-color: #000;
+}
+
+.button {
+	display: inline-block;
+	padding: 10px;
+	background-color: #ccc;
+	border-radius: 5px;
+	margin: 10px;
+	cursor: pointer;
+	user-select: none;
+
+}
+
+.box-cont {
+	overflow: auto;
+}
+
+.box {
+	width: 150px;
+	height: 150px;
+	margin: 10px;
+	background-color: #444;
+	float: left;
+	transition: background-color .3s ease;
+}
+.box-label {
+	background-color: #fff;
+	padding: 5px 0;
+	text-align: center;
+}
