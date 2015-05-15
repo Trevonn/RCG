@@ -15,7 +15,8 @@ function random() {
 		labels[i].textContent = "rgb(" + color.toString() + ")";
 		// Assign colour name to current box label.
 	}
-	button.textContent = "Refresh";
 }
+
+random();
 
 button.addEventListener("click", random, false);
