@@ -1,6 +1,11 @@
 main {
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: -ms-flexbox;
 	display: flex;
-	flex-flow: row;
+	-webkit-flex-flow: row;
+	    -ms-flex-flow: row;
+	        flex-flow: row;
 	height: 100vh;
 	overflow: hidden;
 }
@@ -21,7 +26,8 @@ main {
 	   -moz-user-select: none;
 	    -ms-user-select: none;
 	        user-select: none;
-	transition: box-shadow .15s ease;
+	-webkit-transition: box-shadow .15s ease;
+	        transition: box-shadow .15s ease;
 }
 
 .button:hover {
@@ -36,8 +42,13 @@ main {
 	overflow: auto;
 	width: 90vw;
 	height: 100vh;
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: -ms-flexbox;
 	display: flex;
-	flex-flow: wrap;
+	-webkit-flex-flow: wrap;
+	    -ms-flex-flow: wrap;
+	        flex-flow: wrap;
 }
 
 .box {
