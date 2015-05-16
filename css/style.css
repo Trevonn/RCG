@@ -4,37 +4,37 @@ main {
 	display: -ms-flexbox;
 	display: flex;
 	-webkit-flex-flow: row;
-	    -ms-flex-flow: row;
-	        flex-flow: row;
+	-ms-flex-flow: row;
+	flex-flow: row;
 	height: 100vh;
 	overflow: hidden;
 }
 
-.button-cont {
-	padding: 10px;
+.ui {
 	width: 10vw;
 	height: 100vh;
 	background-color: #263237;
 }
 
-.button {
+.btn {
+	margin: 10px;
 	padding: 10px;
 	background-color: #ccc;
 	text-align: center;
 	cursor: pointer;
 	-webkit-user-select: none;
-	   -moz-user-select: none;
-	    -ms-user-select: none;
-	        user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
 	-webkit-transition: box-shadow .15s ease;
-	        transition: box-shadow .15s ease;
+	transition: box-shadow .15s ease;
 }
 
-.button:hover {
+.btn:hover {
 	box-shadow: 0 0 3px 0px #fff;
 }
 
-.button:active {
+.btn:active {
 	box-shadow: none;
 }
 
@@ -47,19 +47,21 @@ main {
 	display: -ms-flexbox;
 	display: flex;
 	-webkit-flex-flow: wrap;
-	    -ms-flex-flow: wrap;
-	        flex-flow: wrap;
+	-ms-flex-flow: wrap;
+	flex-flow: wrap;
 }
 
 .box {
 	width: calc(100% / 3);
 	background-color: #444;
 	-webkit-transition: background-color .3s ease;
-	        transition: background-color .3s ease;
+	transition: background-color .3s ease;
 }
 
 .box-label {
-	background-color: rgba(255,255,255,0.8);
-	padding: 5px 0;
+	background-color: rgba(255, 255, 255, 0.8);
+	padding: 10px;
 	text-align: center;
+	display: inline-block;
+	border-radius: 0 0 5px 0;
 }
