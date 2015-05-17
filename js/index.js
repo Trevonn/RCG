@@ -2,6 +2,7 @@ var boxes = document.querySelectorAll(".box"),
 	labels = document.querySelectorAll(".box-label"),
 	btn_rgb = document.querySelector(".btn-rgb"),
 	btn_hex = document.querySelector(".btn-hex"),
+	btn_refresh = document.querySelector(".btn-refresh"),
 	colours = ["0","1","2","3","4","5","6","7","8","9","A","B","C","D","E","F"],
 	current = "";
 // Assign variables
@@ -20,8 +21,7 @@ function random(type) {
 			labels[i].textContent = "rgb(" + color.toString() + ")";
 			// Assign colour name to current box label.
 		}
-	}
-	else if (type === "hex") { // hexadecimal colour generator
+	} else if (type === "hex") { // hexadecimal colour generator
 		for (var i = 0; i < boxes.length; i++) { // For each box
 			var color = "";
 			for (var x = 0; x < 6; x++) {
@@ -37,11 +37,16 @@ function random(type) {
 }
 
 btn_rgb.addEventListener("click", function() {
-	random("rgb");
-}, false); // Add function call to RGB button
+	current = "rgb";
+}, false); // Change colour type to RGB
 
 btn_hex.addEventListener("click", function() {
-	random("hex");
-}, false); // Add function call to hexadecimal button
+	current = "hex";
+}, false); // Change colour type to hexadecimal
+
+btn_refresh.addEventListener("click", function() {
+	random(current);
+}, false); // Add function call to refresh button
+
 
 random("rgb"); // Default to rgb colours on startup
