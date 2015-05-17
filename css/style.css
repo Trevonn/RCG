@@ -33,6 +33,14 @@ main {
 	transition-property: color background-color;
 }
 
+/*.btn:hover {
+	box-shadow: 0 0 3px 0px #fff;
+}
+
+.btn:active {
+	box-shadow: none;
+}*/
+
 .choice {
 	display: none;
 }
