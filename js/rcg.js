@@ -6,7 +6,7 @@ var colours = ["0","1","2","3","4","5","6","7","8","9","A","B","C","D","E","F"],
 
 // Assign variables
 
-function rcg(type, element, label, min, max) {
+function rcg(type, min, max) {
 
 	if (min === undefined) { min = default_rgb_min }
 	else if (min < 0 || min > 255) { min = default_rgb_min }
@@ -15,28 +15,20 @@ function rcg(type, element, label, min, max) {
 	// fail case for out of boundary min and max
 
 	current = type;
-	for (var i = 0; i < element.length; i++) {
-		if (type === "rgb") { // rgb colour generator
-			var color = [];
-			for (var x = 0; x < 3; x++) {
-				color[x] = Math.floor(Math.random() * (max + 1 - min) + min);
-				// Generate 3 rgb values and append them to an array
-			}
-			element[i].style.backgroundColor = "rgb(" + color.toString() + ")";
-			// Assign colour to current box.
-			label[i].textContent = "rgb(" + color.toString() + ")";
-			// Assign colour name to current box label.
-		} else if (type === "hex") { // hexadecimal colour generator
-			var color = "";
-			for (var x = 0; x < 6; x++) {
-				color += colours[Math.floor(Math.random() * 16)].toString();
-				// Generate 6 hexadecimal values
-			}
-			element[i].style.backgroundColor = "#" + color;
-			// Assign colour to current box.
-			label[i].textContent = "#" + color;
-			// Assign colour name to current box label.
+	if (type === "rgb") { // rgb colour generator
+		var color = [];
+		for (var x = 0; x < 3; x++) {
+			color[x] = Math.floor(Math.random() * (max + 1 - min) + min);
+			// Generate 3 rgb values and append them to an array
 		}
+		return "rgb(" + color.toString() + ")";
+	} else if (type === "hex") { // hexadecimal colour generator
+		var color = "";
+		for (var x = 0; x < 6; x++) {
+			color += colours[Math.floor(Math.random() * 16)].toString();
+			// Generate 6 hexadecimal values
+		}
+		return "#" + color.toString();
 	}
 }
 
@@ -61,7 +53,7 @@ function convert(type, element, label) {
 
 		}
 		if (type === "rgb") {
-			console.log("poo");
+
 		}
 		if (i === label.length) {
 			current = "rgb";
