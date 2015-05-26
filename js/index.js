@@ -1,40 +1,13 @@
 var boxes = document.querySelectorAll(".box"),
 	labels = document.querySelectorAll(".box-label"),
+	input_rgb = document.getElementsByClassName("choice")[0],
+	input_hex = document.getElementsByClassName("choice")[1],
 	btn_rgb = document.querySelector(".btn-rgb"),
 	btn_hex = document.querySelector(".btn-hex"),
 	btn_refresh = document.querySelector(".btn-refresh"),
-	colours = ["0","1","2","3","4","5","6","7","8","9","A","B","C","D","E","F"],
-	current = "";
-// Assign variables
-
-function random(type) {
-	current = type;
-	if (type === "rgb") { // rgb colour generator
-		for (var i = 0; i < boxes.length; i++) { // For each box
-			var color = [];
-			for (var x = 0; x < 3; x++) {
-				color[x] = Math.floor(Math.random() * 256);
-				// Generate 3 rgb values and append them to an array
-			}
-			boxes[i].style.backgroundColor = "rgb(" + color.toString() + ")";
-			// Assign colour to current box.
-			labels[i].textContent = "rgb(" + color.toString() + ")";
-			// Assign colour name to current box label.
-		}
-	} else if (type === "hex") { // hexadecimal colour generator
-		for (var i = 0; i < boxes.length; i++) { // For each box
-			var color = "";
-			for (var x = 0; x < 6; x++) {
-				color += colours[Math.floor(Math.random() * 16)].toString();
-				// Generate 6 hexadecimal values
-			}
-			boxes[i].style.backgroundColor = "#" + color;
-			// Assign colour to current box.
-			labels[i].textContent = "#" + color;
-			// Assign colour name to current box label.
-		}
-	}
-}
+	btn_convert = document.querySelector(".btn-convert"),
+    rgb_min = parseInt(document.querySelector(".rgb_min").value),
+    rgb_max = parseInt(document.querySelector(".rgb_max").value);
 
 btn_rgb.addEventListener("click", function() {
 	current = "rgb";
@@ -45,8 +18,24 @@ btn_hex.addEventListener("click", function() {
 }, false); // Change colour type to hexadecimal
 
 btn_refresh.addEventListener("click", function() {
-	random(current);
+	rcg(current, boxes, labels, rgb_min, rgb_max);
+	if (current === "rgb") {
+		input_rgb.checked = true;
+	} else if (current === "hex") {
+		input_hex.checked = true;
+	}
 }, false); // Add function call to refresh button
 
+btn_convert.addEventListener("click", function() {
+	convert(current, boxes, labels);
+	if (input_hex.checked === true) {
+		input_rgb.checked = true;
+		current = "rgb";
+	} else if (input_rgb === true) {
+		input_hex.checked = true;
+		current = "hex";
+	}
+})
 
-random("rgb"); // Default to rgb colours on startup
+rcg("rgb", boxes, labels, rgb_min, rgb_max);
+// Default to rgb colours on startup

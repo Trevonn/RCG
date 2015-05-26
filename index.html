@@ -32,13 +32,35 @@
             </div>
         </div>
         <div class="ui">
-            <div class="btn btn-refresh">Refresh</div>
-            <input class="choice" id="rgb" type="radio" name="colour-type" value="rgb" checked="true">
-            <label class="btn btn-rgb" for="rgb">RGB</label>
-            <input class="choice "id="hex" type="radio" name="colour-type" value="hex">
-            <label class="btn btn-hex" for="hex">HEX</label>
+            <div class="btn-cont">
+                <div class="btn btn-refresh">Refresh</div>
+            </div>
+            <!-- <div class="btn-cont">
+                <div class="btn btn-convert">Convert</div>
+            </div> -->
+            <div class="btn-cont">
+                <input class="choice" id="rgb" type="radio" name="colour-type" value="rgb" checked="true">
+                <label class="btn btn-rgb" for="rgb">RGB</label>
+            </div>
+            <div class="cont">
+                <div class="label">RGB Range</div>
+                <div class="label-cont">
+                    <div class="label label-50">Min</div>
+                    <div class="label label-50">Max</div>
+                </div>
+                <div class="input-cont">
+                    <input type="text" class="numInput rgb_min" value="0">
+                    <input type="text" class="numInput rgb_max" value="255">
+                </div>
+            </div>
+            <div class="btn-cont">
+                <input class="choice "id="hex" type="radio" name="colour-type" value="hex">
+                <label class="btn btn-hex" for="hex">HEX</label>
+            </div>
+            <div class="label">HEX Range</div>
         </div>
     </main>
+    <script src="js/rcg.js"></script>
     <script src="js/index.js"></script>
 </body>
 
