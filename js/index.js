@@ -11,7 +11,7 @@ var boxes = document.querySelectorAll(".box"),
 
 function refresh(elements, labels, min, max) {
 	for (var i = 0; i < elements.length; i++) {
-		var color = rcg(current);
+		var color = rcg(current , min, max);
 		elements[i].style.backgroundColor = color;
 		labels[i].textContent = color;
 		//
@@ -39,14 +39,28 @@ if (btn_refresh) {
 
 if (btn_convert) {
 	btn_convert.addEventListener("click", function() {
-		convert(current, boxes, box_labels);
-		if (input_hex.checked === true) {
+
+		if (box_labels[0].textContent.charAt(0) === "r") {
 			input_rgb.checked = true;
 			current = "rgb";
-		} else if (input_rgb === true) {
+		} else if (box_labels[0].textContent.charAt(0) === "#") {
 			input_hex.checked = true;
 			current = "hex";
 		}
+
+		for (var i = 0; i < boxes.length; i++) {
+			var converted = convert(current, box_labels[i].textContent);
+			box_labels[i].textContent = converted;
+		}
+
+		if (input_hex.checked === true) {
+			input_rgb.checked = true;
+			current = "rgb";
+		} else {
+			input_hex.checked = true;
+			current = "hex";
+		}
+
 	}, false)
 }
 

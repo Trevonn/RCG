@@ -1,4 +1,4 @@
-var colours = ["0","1","2","3","4","5","6","7","8","9","A","B","C","D","E","F"],
+var colours = "0123456789ABCDEF",
 	current = "",
 	default_rgb_min = 0,
 	default_rgb_max = 255,
@@ -23,41 +23,56 @@ function rcg(type, min, max) {
 		}
 		return "rgb(" + color.toString() + ")";
 	} else if (type === "hex") { // hexadecimal colour generator
-		var color = "";
-		for (var x = 0; x < 6; x++) {
-			color += colours[Math.floor(Math.random() * 16)].toString();
-			// Generate 6 hexadecimal values
+		var color = ""; // Create color string
+		for (var x = 0; x < 6; x++) { // Loop six times
+			color += colours.charAt(
+				Math.floor(Math.random() * 16)
+			); // Select random hexadecimal value
 		}
-		return "#" + color.toString();
+		return "#" + color; // Spit out hexadecimal colour
 	}
 }
 
-function convert(type, element, label) {
+function convert(type, input_color) {
+	if (type === "hex") { // Convert hexadecimal colour to RGB colour
+		var color = [];
 
-	for (var i = 0; i < label.length; i++) {
-		if (type === "hex") {
-			var color = [],
-				colorLabel = label[i].textContent;
+		color[0] = parseInt("0x" + input_color.substring(1,3), 16);
+		// Red
+		color[1] = parseInt("0x" + input_color.substring(3,5), 16);
+		// Green
+		color[2] = parseInt("0x" + input_color.substring(5,7), 16);
+		// Blue
 
-			color[0] = parseInt("0x" + colorLabel.substring(1,3), 16);
-			// Red
-			color[1] = parseInt("0x" + colorLabel.substring(3,5), 16);
-			// Green
-			color[2] = parseInt("0x" + colorLabel.substring(5,7), 16);
-			// Blue
+		return "rgb(" + color.toString() + ")";
+	}
+	if (type === "rgb") { // Convert RGB Colour to hexadecimal colour
+		var numbers = [],
+			c = 0,
+			currentColor = "",
+			color = "#";
+		for (var i = 0; i < input_color.length; i++) {
 
-			element[i].style.backgroundColor = "rgb(" + color.toString() + ")";
-			// Assign colour to current box.
-			label[i].textContent = "rgb(" + color.toString() + ")";
-			// Assign colour name to current box label.
+			var char = input_color.charAt(i);
+			var isNum = isNaN(parseInt(char), 10);
 
+			if (isNum === false) {
+				currentColor += char;
+				numbers[c] = currentColor;
+			}
+			if (char === ",") {
+				numbers[c] = currentColor;
+				c++;
+				currentColor = "";
+			}
 		}
-		if (type === "rgb") {
-
+		if (numbers.length === 3) {
+			for (var i = 0; i < 3; i++) {
+				var num2 = numbers[i];
+				color += colours.charAt( (num2 - num2 % 16) / 16);
+				color += colours.charAt(num2 % 16);
+			}
 		}
-		if (i === label.length) {
-			current = "rgb";
-
-		}
+		return color;
 	}
 }
