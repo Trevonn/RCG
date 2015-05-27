@@ -9,7 +9,7 @@ var boxes = document.querySelectorAll(".box"),
 
 function refresh(elements, labels, min, max) {
 	for (var i = 0; i < elements.length; i++) {
-		var color = rcg(current , min, max);
+		var color = colourToString(current, rcg(current , min, max));
 		elements[i].style.backgroundColor = color;
 		labels[i].textContent = color;
 		//
@@ -25,7 +25,7 @@ if (btn_rgb) {
 if (btn_hex) {
 	btn_hex.addEventListener("click", function() {
 		current = "hex";
-	}, false); // Change colour type to hexadecimal	
+	}, false); // Change colour type to hexadecimal
 }
 
 if (btn_refresh) {
