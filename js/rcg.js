@@ -84,11 +84,11 @@ function convert(type, colorInput) {
 
 				color += hex_alpha.charAt( (colorValue - colorValue % 16) / 16);
 				color += hex_alpha.charAt(colorValue % 16);
-				// Use magic maths to deduce
+				// Use magic maths to convert RGB value to hexadecimal value
 			}
 		}
 
 		console.log("Successfully converted a " + type +" colour");
-		return color;
+		return color; // Spit out converted colour
 	}
 }
