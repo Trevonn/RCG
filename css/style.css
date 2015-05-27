@@ -47,6 +47,7 @@ main {
 
 .label-cont {
 	overflow: auto;
+	border-radius: 5px 5px 0 0;
 }
 
 .label {
@@ -65,6 +66,7 @@ main {
 
 .input-cont {
 	overflow: auto;
+	border-radius: 0 0 5px 5px;
 }
 
 .numInput {
