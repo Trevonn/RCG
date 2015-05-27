@@ -1,17 +1,15 @@
 var hex_alpha = "0123456789ABCDEF",
 	current = "",
-	default_rgb_min = 0,
-	default_rgb_max = 255,
 	options = {};
 
 // Assign variables
 
 function rcg(type, min, max) {
 
-	if (min === undefined) { min = default_rgb_min }
-	else if (min < 0 || min > 255) { min = default_rgb_min }
-	if (max === undefined) { max = default_rgb_max }
-	else if (max > 255 || max < 0) { max = default_rgb_max }
+	if (min === undefined) { min = 0}
+	else if (min < 0 || min > 255) { min = 0 }
+	if (max === undefined) { max = 255 }
+	else if (max > 255 || max < 0) { max = 255 }
 	// fail case for out of boundary min and max
 
 	current = type;

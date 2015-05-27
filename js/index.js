@@ -5,9 +5,7 @@ var boxes = document.querySelectorAll(".box"),
 	btn_rgb = document.querySelector(".btn-rgb"),
 	btn_hex = document.querySelector(".btn-hex"),
 	btn_refresh = document.querySelector(".btn-refresh"),
-	btn_convert = document.querySelector(".btn-convert"),
-    rgb_min = parseInt(document.querySelector(".rgb_min").value),
-    rgb_max = parseInt(document.querySelector(".rgb_max").value);
+	btn_convert = document.querySelector(".btn-convert");
 
 function refresh(elements, labels, min, max) {
 	for (var i = 0; i < elements.length; i++) {
@@ -18,16 +16,23 @@ function refresh(elements, labels, min, max) {
 	}
 }
 
-btn_rgb.addEventListener("click", function() {
-	current = "rgb";
-}, false); // Change colour type to RGB
+if (btn_rgb) {
+	btn_rgb.addEventListener("click", function() {
+		current = "rgb";
+	}, false); // Change colour type to RGB
+}
 
-btn_hex.addEventListener("click", function() {
-	current = "hex";
-}, false); // Change colour type to hexadecimal
+if (btn_hex) {
+	btn_hex.addEventListener("click", function() {
+		current = "hex";
+	}, false); // Change colour type to hexadecimal	
+}
 
 if (btn_refresh) {
 	btn_refresh.addEventListener("click", function() {
+		var rgb_min = parseInt(document.querySelector(".rgb_min").value),
+	    	rgb_max = parseInt(document.querySelector(".rgb_max").value);
+
 		refresh(boxes, box_labels, rgb_min, rgb_max);
 		if (current === "rgb") {
 			input_rgb.checked = true;
