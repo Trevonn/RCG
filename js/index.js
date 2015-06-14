@@ -8,7 +8,9 @@ var boxes = document.querySelectorAll(".box"),
 	btn_convert = document.querySelector(".btn-convert"),
 	current = "rgb",
 	current2 = "hex",
-	colours = [];
+	colours = [],
+	min,
+	max;
 
 // Declare varibales
 
@@ -43,10 +45,15 @@ if (btn_hex) { // if hex button exists
 if (btn_refresh) {  // If refresh button exists
   btn_refresh.addEventListener("click", function() {
     'use strict';
-    var rgb_min = parseInt(document.querySelector(".rgb_min").value),
-    rgb_max = parseInt(document.querySelector(".rgb_max").value);
+    if (current === "rgb") {
+      min = parseInt(document.querySelector(".rgb_min").value);
+      max = parseInt(document.querySelector(".rgb_max").value);
+    } else {
+    	min = hex_alpha.indexOf(document.querySelector(".hex_min").value.toString().toUpperCase());
+    	max = hex_alpha.indexOf(document.querySelector(".hex_max").value.toString().toUpperCase());
+    }
 
-    refresh(boxes, box_labels, rgb_min, rgb_max);
+    refresh(boxes, box_labels, min, max);
     if (current === "rgb") {
       input_rgb.checked = true;
     } else if (current === "hex") {
@@ -59,14 +66,10 @@ if (btn_convert) { // if convert button exists.
   btn_convert.addEventListener("click", function() {
     'use strict';
     
-    if (box_labels[0].textContent.charAt(0) === "r") {
+    if (current === "rgb") {
       input_rgb.checked = true;
-      current = "rgb";
-      current2 = "hex";
-    } else if (box_labels[0].textContent.charAt(0) === "#") {
+    } else if (current === "hex") {
       input_hex.checked = true;
-      current = "hex";
-      current2 = "rgb";
     }
     
     for (var i = 0; i < boxes.length; i++) {
@@ -75,10 +78,15 @@ if (btn_convert) { // if convert button exists.
       colours[i] = converted;
     }
 
-    if (current === "rgb") {
+    if (box_labels[0].textContent.charAt(0) === "r") {
       input_rgb.checked = true;
-    } else if (current === "hex") {
+      current = "rgb";
+      current2 = "hex";
+    } 
+    if (box_labels[0].textContent.charAt(0) === "#") {
       input_hex.checked = true;
+      current = "hex";
+      current2 = "rgb";
     }
 
   }, false);
