@@ -25,25 +25,17 @@ function randomColor(type, min, max) {
 	key;
 
 	if (type === "rgb") {
-		if (min === undefined) {
-			min = 0;
-		} else if (min < 0 || min > 255) {
+		if (min === undefined || min < 0 || min > 255) {
 			min = 0;
 		}
-		if (max === undefined) {
-			max = 255;
-		} else if (max > 255 || max < 0) {
+		if (max === undefined || max > 255 || max < 0) {
 			max = 255;
 		}
 	} else if (type === "hex") {
-		if (min === undefined) {
-			min = 0;
-		} else if (min < 0 || min > 15) {
+		if (min === undefined || min < 0 || min > 15) {
 			min = 0;
 		}
-		if (max === undefined) {
-			max = 15;
-		} else if (max > 15 || max < 0) {
+		if (max === undefined || max > 15 || max < 0) {
 			max = 15;
 		}
 	}
@@ -55,8 +47,6 @@ function randomColor(type, min, max) {
 			color[key] = randomNumber(min, max);
 		}
 		if (type === "hex") { // hexadecimal colour generator
-			console.log(min);
-			console.log(max);
 			color[key] = hex_alpha.charAt(randomNumber(min, max)) + hex_alpha.charAt(randomNumber(min, max));
 		}
 	}
@@ -66,39 +56,29 @@ function randomColor(type, min, max) {
 function convert(type, colorInput) {
 	"use strict";
 	var color = genColor(),
-	key;
+	key,
+	tempColor = "";
 
 	for (key in color) {
 		if (type === "rgb") { // Convert hexadecimal colour to RGB colour
-
 			color[key] = parseInt("0x" + colorInput[key], 16);
 		}
-
 		if (type === "hex") { // Convert RGB Colour to hexadecimal colour
-
-			var newColor = "";
-
-			// Assing current position to vaiable
-
-			newColor += hex_alpha.charAt((colorInput[key] - colorInput[key] % 16) / 16);
-			newColor += hex_alpha.charAt(colorInput[key] % 16);
-
-			color[key] = newColor;
-
+			tempColor += hex_alpha.charAt((colorInput[key] - colorInput[key] % 16) / 16);
+			tempColor += hex_alpha.charAt(colorInput[key] % 16);
 			// Use magic maths to convert RGB value to hexadecimal value
+			color[key] = tempColor;
+			tempColor = "";
 		}
-
 	}
 	return color; // Spit out converted colour
 }
 
 function colorToString(type, color) {
 	'use strict';
-
 	if (type === "hex") {
 		return "#" + color.red + color.green + color.blue;
 	}
-
 	if (type === "rgb") {
 		return "rgb(" + color.red + "," + color.green + "," + color.blue + ")";
 	}
