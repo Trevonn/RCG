@@ -2,76 +2,77 @@
 <html>
 
 <head>
-		<meta charset="UTF-8">
-		<title>Random Colour Generator</title>
-		<link href="css/normalize.css" rel="stylesheet" />
-		<link href="css/style.css" rel="stylesheet" />
+	<link href='http://fonts.googleapis.com/css?family=Roboto:400,500,300,700' rel='stylesheet' type='text/css'>
+	<meta charset="UTF-8">
+	<title>Random Colour Generator</title>
+	<link href="css/normalize.css" rel="stylesheet" />
+	<link href="css/style.css" rel="stylesheet" />
 </head>
 
 <body>
-		<main>
-				<div class="box-cont">
-						<div class="box">
-								<div class="box-label"></div>
-						</div>
-						<div class="box">
-								<div class="box-label"></div>
-						</div>
-						<div class="box">
-								<div class="box-label"></div>
-						</div>
-						<div class="box">
-								<div class="box-label"></div>
-						</div>
-						<div class="box">
-								<div class="box-label"></div>
-						</div>
-						<div class="box">
-								<div class="box-label"></div>
-						</div>
+	<main>
+		<div class="box-cont">
+			<div class="box">
+				<div class="box-label"></div>
+			</div>
+			<div class="box">
+				<div class="box-label"></div>
+			</div>
+			<div class="box">
+				<div class="box-label"></div>
+			</div>
+			<div class="box">
+				<div class="box-label"></div>
+			</div>
+			<div class="box">
+				<div class="box-label"></div>
+			</div>
+			<div class="box">
+				<div class="box-label"></div>
+			</div>
+		</div>
+		<div class="ui">
+			<div class="btn-cont">
+				<div class="btn btn-refresh">Refresh</div>
+			</div>
+			<div class="btn-cont">
+				<div class="btn btn-convert">Convert</div>
+			</div>
+			<div class="btn-cont">
+				<input class="choice" id="rgb" type="radio" name="colour-type" value="rgb" checked="true">
+				<label class="btn btn-rgb" for="rgb">RGB</label>
+			</div>
+			<div class="btn-cont">
+				<input class="choice" id="hex" type="radio" name="colour-type" value="hex">
+				<label class="btn btn-hex" for="hex">HEX</label>
+			</div>
+			<div class="cont">
+				<div class="label">RGB Range (0 - 255)</div>
+				<div class="label-cont">
+					<div class="label label-50">Min</div>
+					<div class="label label-50">Max</div>
 				</div>
-				<div class="ui">
-						<div class="btn-cont">
-								<div class="btn btn-refresh">Refresh</div>
-						</div>
-						<div class="btn-cont">
-								<div class="btn btn-convert">Convert</div>
-						</div>
-						<div class="btn-cont">
-								<input class="choice" id="rgb" type="radio" name="colour-type" value="rgb" checked="true">
-								<label class="btn btn-rgb" for="rgb">RGB</label>
-						</div>
-						<div class="btn-cont">
-								<input class="choice" id="hex" type="radio" name="colour-type" value="hex">
-								<label class="btn btn-hex" for="hex">HEX</label>
-						</div>
-						<div class="cont">
-								<div class="label">RGB Range (0 - 255)</div>
-								<div class="label-cont">
-										<div class="label label-50">Min</div>
-										<div class="label label-50">Max</div>
-								</div>
-								<div class="input-cont">
-										<input type="text" class="numInput rgb_min" value="0" maxlength="3">
-										<input type="text" class="numInput rgb_max" value="255" maxlength="3">
-								</div>
-						</div>
-						<div class="cont">
-								<div class="label">HEX Range (0 - F)</div>
-								<div class="label-cont">
-										<div class="label label-50">Min</div>
-										<div class="label label-50">Max</div>
-								</div>
-								<div class="input-cont">
-										<input type="text" class="numInput hex_min" value="0" maxlength="1">
-										<input type="text" class="numInput hex_max" value="F" maxlength="1">
-								</div>
-						</div>
-						<div class="copyright">Copyright &copy; 2015 - Trevonn</div>
+				<div class="input-cont">
+					<input type="text" class="numInput rgb_min" value="0" maxlength="3">
+					<input type="text" class="numInput rgb_max" value="255" maxlength="3">
 				</div>
-		</main>
-		<script src="js/rcg.js"></script>
-		<script src="js/index.js"></script>
+			</div>
+			<div class="cont">
+				<div class="label">HEX Range (0 - F)</div>
+					<div class="label-cont">
+						<div class="label label-50">Min</div>
+						<div class="label label-50">Max</div>
+					</div>
+					<div class="input-cont">
+						<input type="text" class="numInput hex_min" value="0" maxlength="1">
+						<input type="text" class="numInput hex_max" value="F" maxlength="1">
+					</div>
+				</div>
+				<div class="copyright">Copyright &copy; 2015 - Trevonn</div>
+			</div>
+	</main>
+	<script src="js/rcg.js"></script>
+	<script src="js/index.js"></script>
 </body>
 
 </html>
