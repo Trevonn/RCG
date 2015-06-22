@@ -1,16 +1,18 @@
 var boxes = document.querySelectorAll(".box"),
-	box_labels = document.querySelectorAll(".box-label"),
-	input_rgb = document.getElementsByClassName("choice")[0],
-	input_hex = document.getElementsByClassName("choice")[1],
-	btn_rgb = document.querySelector(".btn-rgb"),
-	btn_hex = document.querySelector(".btn-hex"),
-	btn_refresh = document.querySelector(".btn-refresh"),
-	btn_convert = document.querySelector(".btn-convert"),
-	current = "rgb",
-	current2 = "hex",
-	colours = [],
-	min,
-	max;
+  box_labels = document.querySelectorAll(".box-label"),
+  input_rgb = document.getElementsByClassName("choice")[0],
+  input_hex = document.getElementsByClassName("choice")[1],
+  btn_rgb = document.querySelector(".btn-rgb"),
+  btn_hex = document.querySelector(".btn-hex"),
+  btn_refresh = document.querySelector(".btn-refresh"),
+  btn_convert = document.querySelector(".btn-convert"),
+  copyright = document.querySelector(".copyright"),
+  current = "rgb",
+  current2 = "hex",
+  colours = [],
+  min = 0,
+  max = 255,
+  year = new Date();
 
 // Declare varibales
 
@@ -49,8 +51,8 @@ if (btn_refresh) {  // If refresh button exists
       min = parseInt(document.querySelector(".rgb_min").value);
       max = parseInt(document.querySelector(".rgb_max").value);
     } else {
-    	min = hex_alpha.indexOf(document.querySelector(".hex_min").value.toString().toUpperCase());
-    	max = hex_alpha.indexOf(document.querySelector(".hex_max").value.toString().toUpperCase());
+      min = hex_alpha.indexOf(document.querySelector(".hex_min").value.toString().toUpperCase());
+      max = hex_alpha.indexOf(document.querySelector(".hex_max").value.toString().toUpperCase());
     }
 
     refresh(boxes, box_labels, min, max);
@@ -92,4 +94,8 @@ if (btn_convert) { // if convert button exists.
   }, false);
 }
 
-refresh(boxes, box_labels, 0, 255); // Initialise
+year = year.getFullYear();
+
+copyright.innerHTML = "&copy; " + year + " - Trevonn";
+
+refresh(boxes, box_labels, min, max); // Initialise
