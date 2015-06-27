@@ -1,5 +1,4 @@
 var hex_alpha = "0123456789ABCDEF",
-	colorNames = ["red", "green", "blue"],
 	current = "";
 
 // Assign variables
@@ -9,20 +8,9 @@ function randomNumber(min, max) {
 	return Math.floor(Math.random() * (max + 1 - min) + min);
 }
 
-function genColor() {
-	'use strict';
-	var obj = {
-		red: 0,
-		green: 0,
-		blue: 0
-	};
-	return obj;
-}
-
 function randomColor(type, min, max) {
 	"use strict";
-	var color = genColor(),
-	key;
+	var color = [];
 
 	if (type === "rgb") {
 		if (min === undefined || min < 0 || min > 255) {
@@ -42,32 +30,31 @@ function randomColor(type, min, max) {
 
 	// fail case for out of boundary min and max
 
-	for (key in color) {
+	for (var i = 0; i < 3; i++) {
 		if (type === "rgb") { // RGB colour generator
-			color[key] = randomNumber(min, max);
+			color[i] = randomNumber(min, max);
 		}
 		if (type === "hex") { // hexadecimal colour generator
-			color[key] = hex_alpha.charAt(randomNumber(min, max)) + hex_alpha.charAt(randomNumber(min, max));
+			color[i] = hex_alpha.charAt(randomNumber(min, max)) + hex_alpha.charAt(randomNumber(min, max));
 		}
 	}
 	return color; // Spit out hexadecimal colour
 }
 
-function convert(type, colorInput) {
+function convert(type, input) {
 	"use strict";
-	var color = genColor(),
-	key,
-	tempColor = "";
+	var tempColor = "",
+		color = []; 
 
-	for (key in color) {
+	for (var i = 0; i < input.length; i++) {
 		if (type === "rgb") { // Convert hexadecimal colour to RGB colour
-			color[key] = parseInt("0x" + colorInput[key], 16);
+			color[i] = parseInt("0x" + input[i], 16);
 		}
 		if (type === "hex") { // Convert RGB Colour to hexadecimal colour
-			tempColor += hex_alpha.charAt((colorInput[key] - colorInput[key] % 16) / 16);
-			tempColor += hex_alpha.charAt(colorInput[key] % 16);
+			tempColor += hex_alpha.charAt((input[i] - input[i] % 16) / 16);
+			tempColor += hex_alpha.charAt(input[i] % 16);
 			// Use magic maths to convert RGB value to hexadecimal value
-			color[key] = tempColor;
+			color[i] = tempColor;
 			tempColor = "";
 		}
 	}
@@ -77,9 +64,9 @@ function convert(type, colorInput) {
 function colorToString(type, color) {
 	'use strict';
 	if (type === "hex") {
-		return "#" + color.red + color.green + color.blue;
+		return "#" + color[0] + color[1] + color[2];
 	}
 	if (type === "rgb") {
-		return "rgb(" + color.red + "," + color.green + "," + color.blue + ")";
+		return "rgb(" + color[0] + "," + color[1] + "," + color[2] + ")";
 	}
 }
