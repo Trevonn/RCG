@@ -35,34 +35,30 @@ function randomColor(type, min, max) {
   // fail case for out of boundary min and max
 
   for (var i = 0; i < 3; i++) {
-    if (type === "rgb") { // RGB colour generator
+    if (type === "rgb") { // RGB color generator
       color[i] = randomNumber(min, max);
     }
-    if (type === "hex") { // hexadecimal colour generator
+    if (type === "hex") { // hexadecimal color generator
       color[i] = hex_alpha.charAt(randomNumber(min, max)) + hex_alpha.charAt(randomNumber(min, max));
     }
   }
-  return color; // Spit out hexadecimal colour
+  return color; // Spit out hexadecimal color
 }
 
 function convert(type, input) {
   "use strict";
-  var tempColor = "",
-  color = []; 
+  var color = []; 
 
   for (var i = 0; i < input.length; i++) {
-    if (type === "rgb") { // Convert hexadecimal colour to RGB colour
+    if (type === "rgb") { // Convert hexadecimal color to RGB color
       color[i] = parseInt("0x" + input[i], 16);
     }
-    if (type === "hex") { // Convert RGB Colour to hexadecimal colour
-      tempColor += hex_alpha.charAt((input[i] - input[i] % 16) / 16);
-      tempColor += hex_alpha.charAt(input[i] % 16);
+    if (type === "hex") { // Convert RGB color to hexadecimal color
       // Use magic maths to convert RGB value to hexadecimal value
-      color[i] = tempColor;
-      tempColor = "";
+      color[i] = hex_alpha.charAt((input[i] - input[i] % 16) / 16) + hex_alpha.charAt(input[i] % 16);
     }
   }
-  return color; // Spit out converted colour
+  return color; // Spit out converted color
 }
 
 function colorToString(type, color) {

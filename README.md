@@ -1,3 +1,3 @@
-# Random Colour Generator
+# Random Color Generator
 
-This is a webpage that generates 6 rcg colours using the hexadecimal or RGB colour formats.
+This is a webpage that generates 6 random colors using the hexadecimal or RGB color formats.
