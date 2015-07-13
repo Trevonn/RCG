@@ -90,8 +90,6 @@ a {
 .inner-box {
     display: flex;
 
-    height: 100%;
-
     transition: background-color .3s ease;
 
     align-items: center;
