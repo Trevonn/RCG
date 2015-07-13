@@ -1,72 +1,77 @@
-var hex_alpha = "0123456789ABCDEF",
-	current = "";
+rcg = {
+	// Assign variables
+	hexes : "0123456789ABCDEF",
 
-// Assign variables
+	newNum : function(min, max) {
+		'use strict';
+		return Math.floor(Math.random() * (max + 1 - min) + min);
+	},
 
-function randomNumber(min, max) {
-  'use strict';
-  return Math.floor(Math.random() * (max + 1 - min) + min);
-}
+	newColor : function(type, min, max) {
+		"use strict";
+		var color = []; // Create color array
 
-function randomColor(type, min, max) {
-  "use strict";
-  var color = [];
+		if (type === "" || type === undefined) {
+			type = "rgb";
+		}
 
-  if (type === "" || type === undefined) {
-    type = "rgb";
-  }
+		if (type === "rgb") {
+			if (min === undefined || min < 0 || min > 255) {
+				min = 0;
+			}
+			if (max === undefined || max > 255 || max < 0) {
+				max = 255;
+			}
+		} else if (type === "hex") {
+			if (min === undefined || min < 0 || min > 15) {
+				min = 0;
+			}
+			if (max === undefined || max > 15 || max < 0) {
+				max = 15;
+			}
+		} // if min or max are empty or do not fit within boundaries use default
 
-  if (type === "rgb") {
-    if (min === undefined || min < 0 || min > 255) {
-      min = 0;
-    }
-    if (max === undefined || max > 255 || max < 0) {
-      max = 255;
-    }
-  } else if (type === "hex") {
-    if (min === undefined || min < 0 || min > 15) {
-      min = 0;
-    }
-    if (max === undefined || max > 15 || max < 0) {
-      max = 15;
-    }
-  }
+		for (var i = 0; i < 3; i++) {
+			// console.log(min);
+			// console.log(max);
+			if (type === "rgb") {
+				color[i] = this.newNum(min, max);
+			} // Add random RGB color to array
 
-  // fail case for out of boundary min and max
+			if (type === "hex") { 
+				color[i] = this.hexes.charAt(this.newNum(min, max)) + this.hexes.charAt(this.newNum(min, max));
+			} // Add random hex color to array
+		}
+		return color;
+	},
 
-  for (var i = 0; i < 3; i++) {
-    if (type === "rgb") { // RGB color generator
-      color[i] = randomNumber(min, max);
-    }
-    if (type === "hex") { // hexadecimal color generator
-      color[i] = hex_alpha.charAt(randomNumber(min, max)) + hex_alpha.charAt(randomNumber(min, max));
-    }
-  }
-  return color; // Spit out hexadecimal color
-}
+	convert : function(type, input) {
+		"use strict";
+		var color = []; 
 
-function convert(type, input) {
-  "use strict";
-  var color = []; 
+		for (var i = 0; i < input.length; i++) {
+			if (type === "rgb") { // Convert hex color to RGB color
+				color[i] = parseInt("0x" + input[i], 16);
+			}
+			if (type === "hex") { // Convert RGB color to hex color
+				// Use magic maths to convert RGB value to hex value
+				color[i] = this.hexes.charAt((input[i] - input[i] % 16) / 16) + this.hexes.charAt(input[i] % 16);
+			}
+		}
+		return color; // Spit out converted color
+	},
 
-  for (var i = 0; i < input.length; i++) {
-    if (type === "rgb") { // Convert hexadecimal color to RGB color
-      color[i] = parseInt("0x" + input[i], 16);
-    }
-    if (type === "hex") { // Convert RGB color to hexadecimal color
-      // Use magic maths to convert RGB value to hexadecimal value
-      color[i] = hex_alpha.charAt((input[i] - input[i] % 16) / 16) + hex_alpha.charAt(input[i] % 16);
-    }
-  }
-  return color; // Spit out converted color
-}
-
-function colorToString(type, color) {
-  'use strict';
-  if (type === "hex") {
-    return "#" + color[0] + color[1] + color[2];
-  }
-  if (type === "rgb") {
-    return "rgb(" + color[0] + "," + color[1] + "," + color[2] + ")";
-  }
+	toText : function(type, color) {
+		'use strict';
+		if (type === "hex") {
+			return "#" + color[0] + color[1] + color[2];
+		}
+		if (type === "rgb") {
+			return "rgb(" + color[0] + "," + color[1] + "," + color[2] + ")";
+		}
+	} 
+	/* 
+		This function takes color values from an array and places them inside 
+		a readable string of text.
+	*/
 }

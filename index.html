@@ -13,59 +13,60 @@
 	<main>
 		<div class="box-cont">
 			<div class="box">
-				<div class="inner-box">
+				<div class="inner-box w100 round">
 					<div class="box-label"></div>
 				</div>
 			</div>
 			<div class="box">
-				<div class="inner-box">
+				<div class="inner-box w100 round">
 					<div class="box-label"></div>
 				</div>
 			</div>
 			<div class="box">
-				<div class="inner-box">
+				<div class="inner-box w100 round">
 					<div class="box-label"></div>
 				</div>
 			</div>
 			<div class="box">
-				<div class="inner-box">
+				<div class="inner-box w100 round">
 					<div class="box-label"></div>
 				</div>
 			</div>
 			<div class="box">
-				<div class="inner-box">
+				<div class="inner-box w100 round">
 					<div class="box-label"></div>
 				</div>
 			</div>
 			<div class="box">
-				<div class="inner-box">
+				<div class="inner-box w100 round">
 					<div class="box-label"></div>
 				</div>
 			</div>
 		</div>
 		<div class="ui">
 			<div class="cont">
-				<div class="btn btn-refresh round">Refresh</div>
+				<div class="btn btn-refresh w100 round">Refresh</div>
 				<input class="choice" id="rgb" type="radio" name="color-type" value="rgb" checked="true">
-				<label class="btn btn-rgb label-50 round-l" for="rgb">RGB</label>
+				<label class="btn btn-rgb w50 round-l" for="rgb">RGB</label>
 				<input class="choice" id="hex" type="radio" name="color-type" value="hex">
-				<label class="btn btn-hex label-50 round-r" for="hex">HEX</label>
+				<label class="btn btn-hex w50 round-r" for="hex">HEX</label>
 			</div>
 			<div class="cont">
-				<div class="label">RGB Range (0 - 255)</div>
-				<div class="label label-50 label-gray round-tl">Min</div>
-				<div class="label label-50 label-gray round-tr">Max</div>
-				<input type="text" class="numInput rgb_min round-bl" value="0" maxlength="3">
-				<input type="text" class="numInput rgb_max round-br" value="255" maxlength="3">
+				<div class="w100 ui-text-light">RGB Range (0 - 255)</div>
+				<div class="w50 label-gray round-tl">Min</div>
+				<div class="w50 label-gray round-tr">Max</div>
+				<input type="text" class="rgb_min w50 round-bl" value="0" maxlength="3">
+				<input type="text" class="rgb_max w50 round-br" value="255" maxlength="3">
 			</div>
 			<div class="cont">
-				<div class="label">HEX Range (0 - F)</div>
-				<div class="label label-50 label-gray round-tl">Min</div>
-				<div class="label label-50 label-gray round-tr">Max</div>
-				<input type="text" class="numInput hex_min round-bl" value="0" maxlength="1">
-				<input type="text" class="numInput hex_max round-br" value="F" maxlength="1">
+				<div class="w100 ui-text-light">HEX Range (0 - F)</div>
+				<div class="w50 label-gray round-tl">Min</div>
+				<div class="w50 label-gray round-tr">Max</div>
+				<input type="text" class="hex_min w50 round-bl" value="0" maxlength="1">
+				<input type="text" class="hex_max w50 round-br" value="F" maxlength="1">
 			</div>
-			<div class="copyright"></div>
+			<div><a href="https://github.com/Trevonn/RCG" target="_blank">Source Code</a></div>
+			<div class="copyright-js ui-text-light"></div>
 	</main>
 	<script src="js/rcg.js"></script>
 	<script src="js/index.js"></script>

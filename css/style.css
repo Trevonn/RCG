@@ -14,6 +14,52 @@ main {
     height: 100vh;
 
     flex-flow: row;
+
+    text-align: center;
+}
+
+a {
+    color: #09f;
+}
+
+.w50 {
+    width: 50%;
+}
+
+.w100 {
+    width: 100%;
+}
+
+.ui-text-light {
+    color: #fff;
+}
+
+.round {
+    border-radius: 8px;
+}
+
+.round-l {
+    border-radius: 8px 0 0 8px;
+}
+
+.round-r {
+    border-radius: 0 8px 8px 0;
+}
+
+.round-tr {
+    border-top-right-radius: 8px;
+}
+
+.round-tl {
+    border-top-left-radius: 8px;
+}
+
+.round-br {
+    border-bottom-right-radius: 8px;
+}
+
+.round-bl {
+    border-bottom-left-radius: 8px;
 }
 
 .box-cont {
@@ -44,24 +90,18 @@ main {
 .inner-box {
     display: flex;
 
-    width: 100%;
     height: 100%;
 
     transition: background-color .3s ease;
-
-    border-radius: 8px;
 
     align-items: center;
     justify-content: center;
 }
 
 .box-label {
-    display: inline-block;
 
-    min-width: 124px;
+    min-width: 144px;
     padding: 10px;
-
-    text-align: center;
 
     border-radius: 8px;
     background-color: #fff;
@@ -75,6 +115,7 @@ main {
     height: 100vh;
     padding: 10px;
 
+    color: #000;
     background-color: #263237;
 
     flex-flow: column;
@@ -90,10 +131,12 @@ main {
     flex-flow: wrap;
 }
 
+.cont > * {
+    padding: 10px 0;
+}
+
 .btn {
     display: block;
-
-    padding: 10px;
 
     cursor: pointer;
     -webkit-user-select: none;
@@ -108,48 +151,21 @@ main {
 }
 
 .btn:active {
-    box-shadow: inset 0 0 1px 1px rgba(0, 0, 0, .6);
+    color: #fff;
+    /*box-shadow: inset 0 0 1px 1px rgba(0, 0, 0, .6);*/
+    background-color: #09f;
 }
 
 .btn-refresh {
-    width: 100%;
     margin-bottom: 10px;
-}
-
-.label-cont {
-    overflow: auto;
-
-    border-radius: 5px 5px 0 0;
-}
-
-.label {
-    width: 100%;
-    
-    padding: 10px;
-
-    text-align: center;
-
-    color: #fff;
-}
-
-.label-50 {
-    width: 50%;
-    padding: 10px 0;
-
-    color: #000;
 }
 
 .label-gray {
     background-color: #ccc;
 }
 
-.numInput {
+input {
     line-height: 1;
-
-    float: left;
-
-    width: 50%;
-    padding: 10px 0;
 
     text-align: center;
     text-transform: uppercase;
@@ -165,38 +181,4 @@ main {
 #rgb:checked + .btn {
     color: #fff;
     background-color: #09f;
-}
-
-.copyright {
-    text-align: center;
-
-    color: #fff;
-}
-
-.round {
-    border-radius: 8px;
-}
-
-.round-l {
-    border-radius: 8px 0 0 8px;
-}
-
-.round-r {
-    border-radius: 0 8px 8px 0;
-}
-
-.round-tr {
-    border-top-right-radius: 8px;
-}
-
-.round-tl {
-    border-top-left-radius: 8px;
-}
-
-.round-br {
-    border-bottom-right-radius: 8px;
-}
-
-.round-bl {
-    border-bottom-left-radius: 8px;
 }

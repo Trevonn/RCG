@@ -5,11 +5,11 @@ var boxes = document.querySelectorAll(".inner-box"),
 	btn_rgb = document.querySelector(".btn-rgb"),
 	btn_hex = document.querySelector(".btn-hex"),
 	btn_refresh = document.querySelector(".btn-refresh"),
-	btn_convert = document.querySelector(".btn-convert"),
-	copyright = document.querySelector(".copyright"),
+	copyright = document.querySelector(".copyright-js"),
 	current = "rgb",
 	current2 = "hex",
 	colors = [],
+	colors2 = [],
 	min = 0,
 	max = 255,
 	year = new Date();
@@ -26,13 +26,11 @@ function changeBackground(element, color) {
 
 function refresh(elements, labels, min, max) {
 	'use strict';
-	for (var x = 0; x < 6; x++) { // Loop 6 times
-		colors[x] = (randomColor(current, min, max)); // Add color to array 
-	} 
-	for (var i = 0; i < elements.length; i++) { // For each element
-		var color = colorToString(current, colors[i]); // Assign color to variable
-		changeBackground(elements[i], color); // Change Background color
-		changeText(labels[i], color); // Change label
+	for (var i = 0; i < elements.length; i++) {   // For each element
+		colors[i] = rcg.newColor(current, min, max); // Add color to array
+		var color = rcg.toText(current, colors[i]); // Assign color to variable
+		changeBackground(elements[i], color);     // Change Background color
+		changeText(labels[i], color);             // Change label
 	}
 }
 
@@ -42,15 +40,16 @@ if (btn_rgb) { // if rgb button exists
 
 		if (current === "rgb") {
 			return
+		} // If colours types are the same then stop
+	
+		for (var i = 0; i < boxes.length; i++) {
+			var converted = rcg.convert("rgb", colors[i]);
+			changeText(box_labels[i], rcg.toText("rgb", converted));
+			colors[i] = converted;
 		}
 
 		current = "rgb";
-		
-		for (var i = 0; i < boxes.length; i++) {
-			var converted = convert(current, colors[i]);
-			changeText(box_labels[i], colorToString(current, converted));
-			colors[i] = converted;
-		}
+		current2 = "hex";
 	}, false); // Change color type to RGB
 }
 
@@ -60,15 +59,16 @@ if (btn_hex) { // if hex button exists
 
 		if (current === "hex") {
 			return
-		}
-		
-		current = "hex";
-
+		} // If colours types are the same then stop
+	
 		for (var i = 0; i < boxes.length; i++) {
-			var converted = convert(current, colors[i]);
-			changeText(box_labels[i], colorToString(current, converted));
+			var converted = rcg.convert("hex", colors[i]);
+			changeText(box_labels[i], rcg.toText("hex", converted));
 			colors[i] = converted;
 		}
+
+		current = "hex";
+		current2 = "rgb";
 	}, false); // Change color type to hexadecimal
 }
 
@@ -79,8 +79,8 @@ if (btn_refresh) {  // If refresh button exists
 			min = parseInt(document.querySelector(".rgb_min").value);
 			max = parseInt(document.querySelector(".rgb_max").value);
 		} else {
-			min = hex_alpha.indexOf(document.querySelector(".hex_min").value.toString().toUpperCase());
-			max = hex_alpha.indexOf(document.querySelector(".hex_max").value.toString().toUpperCase());
+			min = rcg.hexes.indexOf(document.querySelector(".hex_min").value.toString().toUpperCase());
+			max = rcg.hexes.indexOf(document.querySelector(".hex_max").value.toString().toUpperCase());
 		}
 
 		refresh(boxes, box_labels, min, max);
@@ -91,6 +91,16 @@ if (btn_refresh) {  // If refresh button exists
 		}
 	}, false);
 } // Add function call to refresh button
+
+document.onreadystatechange = function () {
+  if (document.readyState == "complete") {
+    if (current === "rgb") {
+		input_rgb.checked = true;
+	} else if (current === "hex") {
+		input_hex.checked = true;
+	}
+  }
+}
 
 year = year.getFullYear();
 
