@@ -13,9 +13,9 @@ main {
 
     height: 100vh;
 
-    flex-flow: row;
-
     text-align: center;
+
+    flex-flow: row;
 }
 
 a {
@@ -96,10 +96,10 @@ a {
 
     align-items: center;
     justify-content: center;
+    align-self: stretch;
 }
 
 .box-label {
-
     min-width: 144px;
     padding: 10px;
 
