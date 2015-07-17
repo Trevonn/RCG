@@ -44,20 +44,19 @@ function changeType(elements, labels, type1) {
 	'use strict';
 
 	if (curType === type1) {
-		return
+		return // Exit if color type is the same
 	}
 
 	for (var i = 0; i < elements.length; i++) {
 		var converted = rcg.convert(type1, colors[i]);
-    // Assign converted color to array
-    console.log("color sucessfully converted");
+    // Assign converted color to variable
     changeText(labels[i], rcg.toText(type1, converted));
     // Change labels to converted color
     colors[i] = converted;
     // Replace color in color array with converted color
 	}
 
-	curType = type1;
+	curType = type1; // Change current color type
 }
 
 for (var i = 0; i < btn_type.length; i++) {
@@ -65,7 +64,7 @@ for (var i = 0; i < btn_type.length; i++) {
     'use strict';
     changeType(boxes, box_labels, this.textContent.toLowerCase());
   }, false);
-};
+}; // Add event listeners to color type buttons
 
 
 if (btn_refresh) {  // If refresh button exists

@@ -56,6 +56,7 @@ rcg = {
         color[i] = this.hexes.charAt((input[i] - input[i] % 16) / 16) + this.hexes.charAt(input[i] % 16);
       }
     }
+    console.log("Color sucessfully converted");
     return color; // Spit out converted color
   },
 
@@ -65,11 +66,11 @@ rcg = {
       return "#" + color[0] + color[1] + color[2];
     }
     if (type === "rgb") {
-      return "rgb(" + color[0] + "," + color[1] + "," + color[2] + ")";
+      return "rgb(" + color.toString() + ")";
     }
   } 
   /* 
   		This function takes color values from an array and places them inside 
   		a readable string of text.
-  	*/
+  */
 }
