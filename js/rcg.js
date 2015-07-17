@@ -32,8 +32,6 @@ rcg = {
 		} // if min or max are empty or do not fit within boundaries use default
 
 		for (var i = 0; i < 3; i++) {
-			// console.log(min);
-			// console.log(max);
 			if (type === "rgb") {
 				color[i] = this.newNum(min, max);
 			} // Add random RGB color to array
