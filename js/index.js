@@ -1,15 +1,15 @@
 var boxes = document.querySelectorAll(".inner-box"),
-	box_labels = document.querySelectorAll(".box-label"),
-	input_rgb = document.getElementsByClassName("choice")[0],
-	input_hex = document.getElementsByClassName("choice")[1],
-	btn_type = document.querySelectorAll(".btn-type"),
-	btn_refresh = document.querySelector(".btn-refresh"),
-	copyright = document.querySelector(".copyright-js"),
-	curType = "rgb",
-	colors = [],
-	min = 0,
-	max = 255,
-	year = new Date();
+  box_labels = document.querySelectorAll(".box-label"),
+  input_rgb = document.getElementsByClassName("choice")[0],
+  input_hex = document.getElementsByClassName("choice")[1],
+  btn_type = document.querySelectorAll(".btn-type"),
+  btn_refresh = document.querySelector(".btn-refresh"),
+  copyright = document.querySelector(".copyright-js"),
+  curType = "rgb",
+  colors = [],
+  min = 0,
+  max = 255,
+  year = new Date();
 
 // Declare varibales
 
@@ -26,7 +26,18 @@ function refresh(elements, labels, min, max) {
 
   if (curType === "rgb") {
     min = parseInt(document.querySelector(".rgb_min").value);
+    
+    if (isNaN(parseInt(min)) === true || parseInt(min) < 0 || parseInt(min) > 255) { 
+      min = 0;
+      document.querySelector(".rgb_min").value = "0";
+    }
+
     max = parseInt(document.querySelector(".rgb_max").value);
+    
+    if (isNaN(parseInt(max)) === true || parseInt(max) < 0 || parseInt(max) > 255) { 
+      max = 255;
+      document.querySelector(".rgb_max").value = "255";
+    }
   } else {
     min = rcg.hexes.indexOf(document.querySelector(".hex_min").value.toString().toUpperCase());
     max = rcg.hexes.indexOf(document.querySelector(".hex_max").value.toString().toUpperCase());
@@ -41,31 +52,30 @@ function refresh(elements, labels, min, max) {
 }
 
 function changeType(elements, labels, type1) {
-	'use strict';
+  'use strict';
 
-	if (curType === type1) {
-		return // Exit if color type is the same
-	}
+  if (curType === type1) {
+    return // Exit if color type is the same
+  }
 
-	for (var i = 0; i < elements.length; i++) {
-		var converted = rcg.convert(type1, colors[i]);
+  for (var i = 0; i < elements.length; i++) {
+    var converted = rcg.convert(type1, colors[i]);
     // Assign converted color to variable
     changeText(labels[i], rcg.toText(type1, converted));
     // Change labels to converted color
     colors[i] = converted;
     // Replace color in color array with converted color
-	}
+  }
 
-	curType = type1; // Change current color type
+  curType = type1; // Change current color type
 }
 
 for (var i = 0; i < btn_type.length; i++) {
-	btn_type[i].addEventListener("click", function() {
+  btn_type[i].addEventListener("click", function() {
     'use strict';
     changeType(boxes, box_labels, this.textContent.toLowerCase());
   }, false);
 }; // Add event listeners to color type buttons
-
 
 if (btn_refresh) {  // If refresh button exists
   btn_refresh.addEventListener("click", function() {

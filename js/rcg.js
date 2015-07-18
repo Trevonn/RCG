@@ -16,10 +16,10 @@ rcg = {
     }
 
     if (type === "rgb") {
-      if (min === undefined || min < 0 || min > 255) {
+      if (min === undefined || min < 0 || min > 255 || isNaN(min)) {
         min = 0;
       }
-      if (max === undefined || max > 255 || max < 0) {
+      if (max === undefined || max > 255 || max < 0 || isNaN(max)) {
         max = 255;
       }
     } else if (type === "hex") {
@@ -56,7 +56,6 @@ rcg = {
         color[i] = this.hexes.charAt((input[i] - input[i] % 16) / 16) + this.hexes.charAt(input[i] % 16);
       }
     }
-    console.log("Color sucessfully converted");
     return color; // Spit out converted color
   },
 
