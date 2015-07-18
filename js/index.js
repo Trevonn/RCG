@@ -39,8 +39,12 @@ function refresh(elements, labels, min, max) {
       document.querySelector(".rgb_max").value = "255";
     }
   } else {
-    min = rcg.hexes.indexOf(document.querySelector(".hex_min").value.toString().toUpperCase());
-    max = rcg.hexes.indexOf(document.querySelector(".hex_max").value.toString().toUpperCase());
+    min = rcg.hexes.indexOf(
+      document.querySelector(".hex_min").value.toString().toUpperCase()
+    );
+    max = rcg.hexes.indexOf(
+      document.querySelector(".hex_max").value.toString().toUpperCase()
+    );
   }
 
   for (var i = 0; i < elements.length; i++) {    // For each element
