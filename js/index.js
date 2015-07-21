@@ -1,11 +1,11 @@
-var boxes = document.querySelectorAll(".inner-box"),
-  box_labels = document.querySelectorAll(".box-label"),
-  input_rgb = document.getElementsByClassName("choice")[0],
-  input_hex = document.getElementsByClassName("choice")[1],
-  btn_type = document.querySelectorAll(".btn-type"),
-  btn_refresh = document.querySelector(".btn-refresh"),
-  copyright = document.querySelector(".copyright-js"),
-  curType = "rgb",
+var boxes = document.querySelectorAll('.inner-box'),
+  boxLabels = document.querySelectorAll('.box-label'),
+  inputRGB = document.getElementsByClassName('choice')[0],
+  inputHEX = document.getElementsByClassName('choice')[1],
+  btnType = document.querySelectorAll('.btn-type'),
+  btnRefresh = document.querySelector('.btn-refresh'),
+  copyright = document.querySelector('.copyright-js'),
+  curType = 'rgb',
   colors = [],
   min = 0,
   max = 255,
@@ -13,45 +13,40 @@ var boxes = document.querySelectorAll(".inner-box"),
 
 // Declare varibales
 
-function changeText(element, text) {
-  element.textContent = text;
-}
-
-function changeBackground(element, color) {
-  element.style.backgroundColor = color
-}
-
 function refresh(elements, labels, min, max) {
   'use strict';
-
-  if (curType === "rgb") {
-    min = parseInt(document.querySelector(".rgb_min").value);
-    
-    if (isNaN(parseInt(min)) === true || parseInt(min) < 0 || parseInt(min) > 255) { 
+  if (curType === 'rgb') {
+    min = parseInt(document.querySelector('.rgb_min').value);
+    // Store chosen minimum value in a variable
+    if (isNaN(parseInt(min)) === true ||
+        parseInt(min) < 0 ||
+        parseInt(min) > 255) {
       min = 0;
-      document.querySelector(".rgb_min").value = "0";
-    }
+      document.querySelector('.rgb_min').value = '0';
+    } // If input is invalid use default minimum value
 
-    max = parseInt(document.querySelector(".rgb_max").value);
-    
-    if (isNaN(parseInt(max)) === true || parseInt(max) < 0 || parseInt(max) > 255) { 
+    max = parseInt(document.querySelector('.rgb_max').value);
+    // Store chosen maximum value in a variable
+    if (isNaN(parseInt(max)) === true ||
+        parseInt(max) < 0 ||
+        parseInt(max) > 255) {
       max = 255;
-      document.querySelector(".rgb_max").value = "255";
-    }
+      document.querySelector('.rgb_max').value = '255';
+    } // If input is invalid use default maximum value
   } else {
     min = rcg.hexes.indexOf(
-      document.querySelector(".hex_min").value.toString().toUpperCase()
-    );
+      document.querySelector('.hex_min').value.toString().toUpperCase()
+    ); // Store chosen minimum value in a variable
     max = rcg.hexes.indexOf(
-      document.querySelector(".hex_max").value.toString().toUpperCase()
-    );
+      document.querySelector('.hex_max').value.toString().toUpperCase()
+    ); // Store chosen maximum value in a variable
   }
 
   for (var i = 0; i < elements.length; i++) {    // For each element
     colors[i] = rcg.newColor(curType, min, max); // Add color to array
     var color = rcg.toText(curType, colors[i]);  // Assign color to variable
-    changeBackground(elements[i], color);        // Change Background color
-    changeText(labels[i], color);                // Change label
+    elements[i].style.backgroundColor = color;   // Change Background color
+    labels[i].textContent = color;               // Change label
   }
 }
 
@@ -59,13 +54,13 @@ function changeType(elements, labels, type1) {
   'use strict';
 
   if (curType === type1) {
-    return // Exit if color type is the same
+    return; // Exit if color type is the same
   }
 
   for (var i = 0; i < elements.length; i++) {
     var converted = rcg.convert(type1, colors[i]);
     // Assign converted color to variable
-    changeText(labels[i], rcg.toText(type1, converted));
+    labels[i].textContent = rcg.toText(type1, converted);
     // Change labels to converted color
     colors[i] = converted;
     // Replace color in color array with converted color
@@ -74,38 +69,38 @@ function changeType(elements, labels, type1) {
   curType = type1; // Change current color type
 }
 
-for (var i = 0; i < btn_type.length; i++) {
-  btn_type[i].addEventListener("click", function() {
+for (var i = 0; i < btnType.length; i++) {
+  btnType[i].addEventListener('click', function() {
     'use strict';
-    changeType(boxes, box_labels, this.textContent.toLowerCase());
+    changeType(boxes, boxLabels, this.textContent.toLowerCase());
   }, false);
-}; // Add event listeners to color type buttons
+} // Add event listeners to color type buttons
 
-if (btn_refresh) {  // If refresh button exists
-  btn_refresh.addEventListener("click", function() {
+if (btnRefresh) {  // If refresh button exists
+  btnRefresh.addEventListener('click', function() {
     'use strict';
-
-    refresh(boxes, box_labels, min, max);
-    if (curType === "rgb") {
-      input_rgb.checked = true;
-    } else if (curType === "hex") {
-      input_hex.checked = true;
+    refresh(boxes, boxLabels, min, max);
+    if (curType === 'rgb') {
+      inputRGB.checked = true;
+    } else if (curType === 'hex') {
+      inputHEX.checked = true;
     }
   }, false);
 } // Add function call to refresh button
 
 document.onreadystatechange = function() {
-  if (document.readyState == "complete") {
-    if (curType === "rgb") {
-      input_rgb.checked = true;
-    } else if (curType === "hex") {
-      input_hex.checked = true;
+  'use strict';
+  if (document.readyState == 'complete') {
+    if (curType === 'rgb') {
+      inputRGB.checked = true;
+    } else if (curType === 'hex') {
+      inputHEX.checked = true;
     }
   }
-}
+};
 
 year = year.getFullYear();
 
-copyright.innerHTML = "&copy; " + year + " - Trevonn";
+copyright.innerHTML = '&copy; ' + year + ' - Trevonn';
 
-refresh(boxes, box_labels, min, max); // Initialise
+refresh(boxes, boxLabels, min, max); // Initialise
