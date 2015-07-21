@@ -178,6 +178,7 @@ input {
 input:focus {
     background-color: #315896;
     color: #fff;
+    outline: none; /* Chrome only */
 }
 
 .choice {
