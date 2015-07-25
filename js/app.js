@@ -1,51 +1,53 @@
 var boxes = document.querySelectorAll('.inner-box'),
-  boxLabels = document.querySelectorAll('.box-label'),
-  inputRGB = document.getElementsByClassName('choice')[0],
-  inputHEX = document.getElementsByClassName('choice')[1],
-  btnType = document.querySelectorAll('.btn-type'),
-  btnRefresh = document.querySelector('.btn-refresh'),
-  copyright = document.querySelector('.copyright-js'),
-  inputs = document.querySelectorAll('.colorInput'),
-  curType = 'rgb',
-  colors = [],
-  min = 0,
-  max = 255,
-  year = new Date();
+	boxLabels = document.querySelectorAll('.box-label'),
+	inputRGB = document.getElementsByClassName('choice')[0],
+	inputHEX = document.getElementsByClassName('choice')[1],
+	btnType = document.querySelectorAll('.btn-type'),
+	btnRefresh = document.querySelector('.btn-refresh'),
+	copyright = document.querySelector('.copyright-js'),
+	inputs = document.querySelectorAll('.colorInput'),
+	curType = 'rgb',
+	colors = [],
+	min = 0,
+	max = 255,
+	year = new Date();
 
 // Declare varibales
 
 function filterInt(value) {
   if (/^(\-|\+)?([0-9]+|Infinity)$/.test(value))
-    return Number(value);
+  return Number(value);
   return NaN;
 }
 
 function refresh(elements, labels, min, max) {
   'use strict';
   if (curType === 'rgb') {
-    var customMin = filterInt(inputs[0].value);
-    var customMax = filterInt(inputs[1].value);
-    if (customMin < 0 || customMax > 255 || isNaN(customMin)) {
+    var customRgbMin = filterInt(inputs[0].value);
+    var customRgbMax = filterInt(inputs[1].value);
+    if (customRgbMin < 0 || customRgbMin > 255 || isNaN(customRgbMin)) {
       min = 0;
       inputs[0].value = '0';
     } else {
-      min = customMin;
+      min = customRgbMin;
     }
-    if (customMax < 0 || customMax > 255 || isNaN(customMax)) {
+    if (customRgbMax < 0 || customRgbMax > 255 || isNaN(customRgbMax)) {
       max = 255;
       inputs[1].value = '255';
     } else {
-      max = customMax
+      max = customRgbMax;
     }
   } else {
-    if (rcg.hexes.indexOf(inputs[2].value) !== -1) {
-      min = rcg.hexes.indexOf(inputs[2].value);
+    var customHexMin = rc.hexes.indexOf(inputs[2].value);
+    var customHexMax = rc.hexes.indexOf(inputs[3].value);
+    if (customHexMin !== -1) {
+      min = customHexMin;
     } else {
       inputs[2].value = '0';
       min = 0;
     } //
-    if (rcg.hexes.indexOf(inputs[3].value) !== -1) {
-      max = rcg.hexes.indexOf(inputs[3].value);
+    if (customHexMax !== -1) {
+      max = customHexMax;
     } else {
       inputs[3].value = 'F';
       max = 15;
@@ -53,8 +55,8 @@ function refresh(elements, labels, min, max) {
   }
 
   for (var i = 0; i < elements.length; i++) {    // For each element
-    colors[i] = rcg.newColor(curType, min, max); // Add color to array
-    var color = rcg.toText(curType, colors[i]);  // Assign color to variable
+    colors[i] = rc.newColor(curType, min, max); // Add color to array
+    var color = rc.toText(curType, colors[i]);  // Assign color to variable
     elements[i].style.backgroundColor = color;   // Change Background color
     labels[i].textContent = color;               // Change label
   }
@@ -68,9 +70,9 @@ function changeType(elements, labels, type1) {
   }
 
   for (var i = 0; i < elements.length; i++) {
-    var converted = rcg.convert(type1, colors[i]);
+    var converted = rc.convert(type1, colors[i]);
     // Assign converted color to variable
-    var color = rcg.toText(type1, converted);
+    var color = rc.toText(type1, converted);
     labels[i].textContent = color;
     // Change labels to converted color
     colors[i] = converted;
