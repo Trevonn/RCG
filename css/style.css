@@ -10,11 +10,8 @@ html {
 main {
     display: flex;
     overflow: hidden;
-
     height: 100vh;
-
     text-align: center;
-
     flex-flow: row;
 }
 
@@ -69,33 +66,25 @@ a {
 .box-cont {
     display: flex;
     overflow: auto;
-
     width: 90vw;
     height: 100vh;
     padding: 10px;
-
     background-color: #000;
-
     flex-flow: wrap;
 }
 
 .box {
     display: flex;
-
     width: calc(100% / 3);
     padding: 10px;
-
     transition: background-color .3s ease;
-
     align-items: center;
     justify-content: center;
 }
 
 .inner-box {
     display: flex;
-
     transition-property: background-color;
-
     align-items: center;
     justify-content: center;
     align-self: stretch;
@@ -104,7 +93,6 @@ a {
 .box-label {
     min-width: 144px;
     padding: 10px;
-
     border-radius: 8px;
     background-color: #fff;
     background-color: rgba(255, 255, 255, .6);
@@ -112,14 +100,11 @@ a {
 
 .ui {
     display: flex;
-
     width: 10vw;
     height: 100vh;
     padding: 10px;
-
     color: #000;
     background-color: #263237;
-
     flex-flow: column;
 }
 
@@ -129,7 +114,6 @@ a {
 
 .cont {
     display: flex;
-
     flex-flow: wrap;
 }
 
@@ -139,16 +123,14 @@ a {
 
 .btn {
     display: block;
-
     cursor: pointer;
     -webkit-user-select: none;
-       -moz-user-select: none;
-        -ms-user-select: none;
-            user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
     transition: all .15s ease;
     transition-property: color, background-color, box-shadow;
     text-align: center;
-
     background-color: #fff;
 }
 
@@ -167,18 +149,17 @@ a {
 
 input {
     line-height: 1;
-
     text-align: center;
     text-transform: uppercase;
     transition-property: background-color, color;
-
     border: none;
 }
 
 input:focus {
     background-color: #315896;
     color: #fff;
-    outline: none; /* Chrome only */
+    outline: none;
+    /* Chrome only */
 }
 
 .choice {

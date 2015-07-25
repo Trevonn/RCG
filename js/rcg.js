@@ -1,13 +1,13 @@
 var rcg = {
   // Assign variables
-  hexes : '0123456789ABCDEF',
+  hexes: '0123456789abcdef',
 
-  newNum : function(min, max) {
+  newNum: function(min, max) {
     'use strict';
     return Math.floor(Math.random() * (max + 1 - min) + min);
   },
 
-  newColor : function(type, min, max) {
+  newColor: function(type, min, max) {
     'use strict';
     var color = [];
 
@@ -43,33 +43,33 @@ var rcg = {
     return color;
   },
 
-  convert : function(type, input) {
+  convert: function(type, input) {
     'use strict';
     var color = [];
 
     for (var i = 0; i < input.length; i++) {
-      switch (type){
+      switch (type) {
 
-      case 'rgb':
-        color[i] = parseInt('0x' + input[i], 16);
-        break;
+        case 'rgb':
+          color[i] = parseInt('0x' + input[i], 16);
+          break;
 
-      case 'hex':
-        color[i] = this.hexes.charAt((input[i] - input[i] % 16) / 16) + this.hexes.charAt(input[i] % 16);
-        break;
+        case 'hex':
+          color[i] = this.hexes.charAt((input[i] - input[i] % 16) / 16) + this.hexes.charAt(input[i] % 16);
+          break;
 
-      default:
-        console.log('Function: Convert \nError: color type is invalid. \nTry putting quotes around the string.');
-        break;
+        default:
+          console.log('Function: Convert \nError: color type is invalid. \nTry putting quotes around the string.');
+          break;
       }
     }
     return color; // Spit out converted color
   },
 
-  toText : function(type, color) {
+  toText: function(type, color) {
     'use strict';
     var result;
-    switch (type){
+    switch (type) {
 
       case 'rgb':
         result = 'rgb(' + color.toString() + ')';
@@ -77,6 +77,7 @@ var rcg = {
 
       case 'hex':
         result = '#' + color[0] + color[1] + color[2];
+        result = result.toUpperCase();
         break;
 
       default:
@@ -86,7 +87,7 @@ var rcg = {
     return result;
   }
   /*
-      This function takes color values from an array and places them inside
-      a readable string of text.
+  	This function takes color values from an array and places them inside
+  	a readable string of text.
   */
 };
