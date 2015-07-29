@@ -1,16 +1,17 @@
-var boxes = document.querySelectorAll('.inner-box'),
-	boxLabels = document.querySelectorAll('.box-label'),
-	inputRGB = document.getElementsByClassName('choice')[0],
-	inputHEX = document.getElementsByClassName('choice')[1],
-	btnType = document.querySelectorAll('.btn-type'),
-	btnRefresh = document.querySelector('.btn-refresh'),
-	copyright = document.querySelector('.copyright-js'),
-	inputs = document.querySelectorAll('.colorInput'),
-	curType = 'rgb',
-	colors = [],
-	min = 0,
-	max = 255,
-	year = new Date();
+var boxes = document.querySelectorAll('.inner-box');
+var boxLabels = document.querySelectorAll('.box-label');
+var inputRGB = document.getElementsByClassName('choice')[0];
+var inputHEX = document.getElementsByClassName('choice')[1];
+var btnType = document.querySelectorAll('.btn-type');
+var btnRefresh = document.querySelector('.btn-refresh');
+var copyright = document.querySelector('.copyright-js');
+var inputs = document.querySelectorAll('.colorInput');
+var curType = 'rgb';
+var colors = [];
+var min = 0;
+var max = 255;
+
+year = new Date();
 
 // Declare varibales
 
@@ -22,36 +23,42 @@ function filterInt(value) {
 
 function refresh(elements, labels, min, max) {
   'use strict';
-  if (curType === 'rgb') {
-    var customRgbMin = filterInt(inputs[0].value);
-    var customRgbMax = filterInt(inputs[1].value);
-    if (customRgbMin < 0 || customRgbMin > 255 || isNaN(customRgbMin)) {
-      min = 0;
-      inputs[0].value = '0';
-    } else {
-      min = customRgbMin;
-    }
-    if (customRgbMax < 0 || customRgbMax > 255 || isNaN(customRgbMax)) {
-      max = 255;
-      inputs[1].value = '255';
-    } else {
-      max = customRgbMax;
-    }
+  var customRgbMin = filterInt(inputs[0].value);
+  var customRgbMax = filterInt(inputs[1].value);
+
+  if (customRgbMin < 0 || customRgbMin > 255 || isNaN(customRgbMin)) {
+    min = 0;
+    inputs[0].value = '0';
   } else {
-    var customHexMin = rc.hexes.indexOf(inputs[2].value);
-    var customHexMax = rc.hexes.indexOf(inputs[3].value);
-    if (customHexMin !== -1) {
-      min = customHexMin;
-    } else {
-      inputs[2].value = '0';
-      min = 0;
-    } //
-    if (customHexMax !== -1) {
-      max = customHexMax;
-    } else {
-      inputs[3].value = 'F';
-      max = 15;
-    } //
+    min = customRgbMin;
+  } // if chosen minimum is invalid reset the value
+  if (customRgbMax < 0 || customRgbMax > 255 || isNaN(customRgbMax)) {
+    max = 255;
+    inputs[1].value = '255';
+  } else {
+    max = customRgbMax;
+  } // if chosen maximum is invalid reset the value
+  var customHexMin = rc.hexes.indexOf(inputs[2].value);
+  var customHexMax = rc.hexes.indexOf(inputs[3].value);
+  if (customHexMin !== -1) {
+    min = customHexMin;
+  } else {
+    inputs[2].value = '0';
+    min = 0;
+  } // if chosen minimum is invalid reset the value
+  if (customHexMax !== -1) {
+    max = customHexMax;
+  } else {
+    inputs[3].value = 'F';
+    max = 15;
+  } // if chosen maximum is invalid reset the value
+
+  if (curType === 'rgb') {
+    min = filterInt(inputs[0].value);
+    max = filterInt(inputs[1].value);
+  } else {
+    min = rc.hexes.indexOf(inputs[2].value);
+    max = rc.hexes.indexOf(inputs[3].value);
   }
 
   for (var i = 0; i < elements.length; i++) {    // For each element
