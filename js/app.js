@@ -23,47 +23,45 @@ function filterInt(value) {
 
 function refresh(elements, labels, min, max) {
   'use strict';
-  var customRgbMin = filterInt(inputs[0].value);
-  var customRgbMax = filterInt(inputs[1].value);
-
-  if (customRgbMin < 0 || customRgbMin > 255 || isNaN(customRgbMin)) {
-    min = 0;
-    inputs[0].value = '0';
-  } else {
-    min = customRgbMin;
-  } // if chosen minimum is invalid reset the value
-  if (customRgbMax < 0 || customRgbMax > 255 || isNaN(customRgbMax)) {
-    max = 255;
-    inputs[1].value = '255';
-  } else {
-    max = customRgbMax;
-  } // if chosen maximum is invalid reset the value
-  var customHexMin = rc.hexes.indexOf(inputs[2].value);
-  var customHexMax = rc.hexes.indexOf(inputs[3].value);
-  if (customHexMin !== -1) {
-    min = customHexMin;
-  } else {
-    inputs[2].value = '0';
-    min = 0;
-  } // if chosen minimum is invalid reset the value
-  if (customHexMax !== -1) {
-    max = customHexMax;
-  } else {
-    inputs[3].value = 'F';
-    max = 15;
-  } // if chosen maximum is invalid reset the value
 
   if (curType === 'rgb') {
-    min = filterInt(inputs[0].value);
-    max = filterInt(inputs[1].value);
+    var customRgbMin = filterInt(inputs[0].value);
+    var customRgbMax = filterInt(inputs[1].value);
+
+    if (customRgbMin < 0 || customRgbMin > 255 || isNaN(customRgbMin)) {
+      min = 0;
+      inputs[0].value = '0';
+    } else {
+      min = customRgbMin;
+    } // if chosen minimum is invalid reset the value
+    if (customRgbMax < 0 || customRgbMax > 255 || isNaN(customRgbMax)) {
+      max = 255;
+      inputs[1].value = '255';
+    } else {
+      max = customRgbMax;
+    } // if chosen maximum is invalid reset the value
   } else {
-    min = rc.hexes.indexOf(inputs[2].value);
-    max = rc.hexes.indexOf(inputs[3].value);
+    var customHexMin = rc.hexes.indexOf(inputs[2].value);
+    var customHexMax = rc.hexes.indexOf(inputs[3].value);
+
+    if (customHexMin !== -1) {
+      min = customHexMin;
+    } else {
+      inputs[2].value = '0';
+      min = 0;
+    } // if chosen minimum is invalid reset the value
+    if (customHexMax !== -1) {
+      max = customHexMax;
+    } else {
+      inputs[3].value = 'F';
+      max = 15;
+    } // if chosen maximum is invalid reset the value
   }
+  
+  colors = rc.newColor(curType, min, max, elements.length); // Generate colors
 
   for (var i = 0; i < elements.length; i++) {    // For each element
-    colors[i] = rc.newColor(curType, min, max); // Add color to array
-    var color = rc.toText(curType, colors[i]);  // Assign color to variable
+    var color = rc.toText(curType, colors[i]);   // Assign color to variable
     elements[i].style.backgroundColor = color;   // Change Background color
     labels[i].textContent = color;               // Change label
   }

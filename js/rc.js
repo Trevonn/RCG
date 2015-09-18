@@ -7,9 +7,13 @@ rc.newNum = function(min, max) {
   return Math.floor(Math.random() * (max + 1 - min) + min);
 }
 
-rc.newColor = function(type, min, max) {
+rc.newColor = function(type, min, max, amount) {
   'use strict';
-  var color = [];
+  var output = [];
+
+  if (amount === undefined || amount < 1 || amount === null) {
+    amount = 1;
+  }
 
   if (type === '' || type === undefined) {
     type = 'rgb';
@@ -19,6 +23,7 @@ rc.newColor = function(type, min, max) {
     if (min === undefined || min < 0 || min > 255 || isNaN(min) || min > max) {
       min = 0;
     }
+
     if (max === undefined || max > 255 || max < 0 || isNaN(max) || max > min) {
       max = 255;
     }
@@ -31,16 +36,24 @@ rc.newColor = function(type, min, max) {
     }
   } // if min or max are empty or do not fit within boundaries use default
 
-  for (var i = 0; i < 3; i++) {
-    if (type === 'rgb') {
-      color[i] = this.newNum(min, max);
-    } // Add random RGB color to array
+  for (var i = 0; i < amount; i++) {
+    var color = [];
 
-    if (type === 'hex') {
-      color[i] = this.hexes.charAt(this.newNum(min, max)) + this.hexes.charAt(this.newNum(min, max));
-    } // Add random hex color to array
+    for (var x = 0; x < 3; x++) {
+      if (type === 'rgb') {
+        color[x] = this.newNum(min, max);
+      } // Add random RGB color to array
+
+      if (type === 'hex') {
+        color[x] = this.hexes.charAt(this.newNum(min, max)) +
+                   this.hexes.charAt(this.newNum(min, max));
+      } // Add random hex color to array
+    }
+
+    output[i] = color;
+    color = [];
   }
-  return color;
+  return output;
 }
 
 rc.convert = function(type, input) {
@@ -55,7 +68,8 @@ rc.convert = function(type, input) {
         break;
 
       case 'hex':
-        color[i] = this.hexes.charAt((input[i] - input[i] % 16) / 16) + this.hexes.charAt(input[i] % 16);
+        color[i] = this.hexes.charAt((input[i] - input[i] % 16) / 16) +
+                   this.hexes.charAt(input[i] % 16);
         break;
 
       default:
