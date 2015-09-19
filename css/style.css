@@ -17,6 +17,12 @@ main {
 
 a {
     color: #09f;
+    text-decoration: none;
+}
+
+a:hover,
+a:active {
+    text-decoration: underline;
 }
 
 .w50 {
