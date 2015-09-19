@@ -80,13 +80,18 @@ rc.convert = function(type, input) {
   return color; // Spit out converted color
 }
 
-rc.toText = function(type, color) {
+rc.toText = function(color, type) {
   /*
     This function takes color values from an array and places them inside
     a readable string of text.
   */
   'use strict';
   var result;
+
+  if (type === undefined || type !== 'rgb' || type !== 'hex') {
+    type = "rgb";
+  }
+
   switch (type) {
 
     case 'rgb':
