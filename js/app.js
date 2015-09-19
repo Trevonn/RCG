@@ -17,8 +17,8 @@ year = new Date();
 
 function filterInt(value) {
   if (/^(\-|\+)?([0-9]+|Infinity)$/.test(value))
-  return Number(value);
-  return NaN;
+    return Number(value);
+    return NaN;
 }
 
 function refresh(elements, labels, min, max) {
@@ -61,7 +61,7 @@ function refresh(elements, labels, min, max) {
   colors = rc.newColor(curType, min, max, elements.length); // Generate colors
 
   for (var i = 0; i < elements.length; i++) {    // For each element
-    var color = rc.toText(curType, colors[i]);   // Assign color to variable
+    var color = rc.toText(colors[i], curType);   // Assign color to variable
     elements[i].style.backgroundColor = color;   // Change Background color
     labels[i].textContent = color;               // Change label
   }
@@ -77,7 +77,7 @@ function changeType(elements, labels, type1) {
   for (var i = 0; i < elements.length; i++) {
     var converted = rc.convert(type1, colors[i]);
     // Assign converted color to variable
-    var color = rc.toText(type1, converted);
+    var color = rc.toText(converted, type1);
     labels[i].textContent = color;
     // Change labels to converted color
     colors[i] = converted;
