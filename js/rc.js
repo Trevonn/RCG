@@ -88,10 +88,6 @@ rc.toText = function(color, type) {
   'use strict';
   var result;
 
-  if (type === undefined || type !== 'rgb' || type !== 'hex') {
-    type = "rgb";
-  }
-
   switch (type) {
 
     case 'rgb':
@@ -103,8 +99,12 @@ rc.toText = function(color, type) {
       result = result.toUpperCase();
       break;
 
+    case undefined:
+      result = 'rgb(' + color.toString() + ')';
+      break;
+
     default:
-      console.log('Function: toText \nError: color type is invalid. \nPossible solution: Try putting quotes around the string.');
+      console.log('Function: toText \nError: Color type is invalid. \nFix: The color type must be either hex or rgb');
       break;
   }
   return result;
