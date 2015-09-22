@@ -177,3 +177,42 @@ input:focus {
     color: #fff;
     background-color: #315896;
 }
+
+@media only screen and (max-width: 360px), (orientation: portrait) {
+    
+    main {
+        flex-flow: column nowrap;
+    }
+
+    .box-cont {
+        width: 100vw;
+        height: 100vh;
+        padding: 5px;
+    }
+
+    .box {
+        padding: 5px;
+    }
+
+    .ui {
+        height: auto;
+        width: 100vw;
+        padding: 0;
+    }
+
+    .ui > *,
+    .btn-refresh {
+        margin-bottom: 0;
+    }
+
+    .box-label,
+    .ui div:not(:first-child),
+    .btn-type {
+        display: none;
+    }
+
+    .btn-refresh {
+        border-radius: 0;
+    }
+
+}
