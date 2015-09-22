@@ -192,6 +192,7 @@ input:focus {
 
     .box {
         padding: 5px;
+        width: calc(100% / 2);
     }
 
     .ui {
