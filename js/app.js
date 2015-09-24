@@ -3,7 +3,7 @@ var boxLabels = document.querySelectorAll('.box-label');
 var inputRGB = document.getElementsByClassName('choice')[0];
 var inputHEX = document.getElementsByClassName('choice')[1];
 var btnType = document.querySelectorAll('.btn-type');
-var btnRefresh = document.querySelector('.btn-refresh');
+var btnRefresh = document.querySelectorAll('.btn-refresh');
 var copyright = document.querySelector('.copyright-js');
 var inputs = document.querySelectorAll('.colorInput');
 var curType = 'rgb';
@@ -94,16 +94,18 @@ for (var i = 0; i < btnType.length; i++) {
   }, false);
 } // Add event listeners to color type buttons
 
-if (btnRefresh) {  // If refresh button exists
-  btnRefresh.addEventListener('click', function() {
-    'use strict';
-    refresh(boxes, boxLabels, min, max);
-    if (curType === 'rgb') {
-      inputRGB.checked = true;
-    } else if (curType === 'hex') {
-      inputHEX.checked = true;
-    }
-  }, false);
+if (btnRefresh.length === 2) {  // If refresh button exists
+  for (var i = 0; i < btnRefresh.length; i++) {
+    btnRefresh[i].addEventListener('click', function() {
+      'use strict';
+      refresh(boxes, boxLabels, min, max);
+      if (curType === 'rgb') {
+        inputRGB.checked = true;
+      } else if (curType === 'hex') {
+        inputHEX.checked = true;
+      }
+    }, false);
+  }
 } // Add function call to refresh button
 
 document.onreadystatechange = function() {
