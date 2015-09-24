@@ -243,9 +243,9 @@ input:focus {
     .btn-refresh {
         font-size: 5vh;
         display: none;
-        color: #fff;
+        color: #000;
         border-radius: 0;
-        background-color: #263237;
+        background-color: #ddd;
     }
 
     .btn-refresh-mobile {
