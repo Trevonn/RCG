@@ -131,7 +131,7 @@ main {
 }
 
 .ui > * {
-    margin-bottom: 10px;
+    margin-bottom: 0.5vw;
 }
 
 .cont {
@@ -141,7 +141,7 @@ main {
 }
 
 .cont > * {
-    padding: 10px 0;
+    padding: 0.5vw 0;
 }
 
 .btn {
@@ -159,13 +159,19 @@ main {
     background-color: #fff;
 }
 
-.btn:active {
+.btn-type:active {
     color: #fff;
     background-color: #315896;
 }
 
 .btn-refresh {
-    margin-bottom: 10px;
+    margin-bottom: 0.5vw;
+    padding: 0;
+    font-size: 1.5vw;
+}
+
+.spin {
+    animation: spin 200ms linear;
 }
 
 .btn-refresh-mobile {
@@ -203,7 +209,17 @@ input:focus {
     background-color: #315896;
 }
 
-@media screen and (min-device-width: 320px) and (max-device-width: 768px) {
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(180deg);
+    }
+}
+
+@media screen and (min-width: 320px) and (max-width: 768px) {
     main {
         flex-flow: column nowrap;
     }
@@ -242,29 +258,34 @@ input:focus {
 
     .btn-refresh {
         font-size: 5vh;
-        display: none;
         color: #000;
         border-radius: 0;
-        background-color: #ddd;
-    }
-
-    .btn-refresh-mobile {
-        display: block;
+        padding: 0;
     }
 }
 
-@media screen and (min-device-width: 320px) and (max-device-width: 1024px) and (orientation: landscape) {
+@media screen and (min-width: 320px) and (max-width: 1024px) and (orientation: landscape) {
     .box {
         width: calc(100% / 3);
         padding: 1vw;
     }
 
+    .ui > * {
+        margin-bottom: 1vw;
+    }
+
     .cont > * {
         padding: 0.75vw;
     }
+
+    .btn-refresh {
+        padding: 0;
+        font-size: 2.5vw;
+        margin-bottom: 1vw;
+    }
 }
 
-@media screen and (min-device-width: 800px) and (max-device-width: 1280px) {
+@media screen and (min-width: 800px) and (max-width: 1280px) {
     .box-cont {
         width: 80vw;
     }
@@ -273,8 +294,22 @@ input:focus {
         width: 20vw;
     }
 
+    .cont > * {
+        padding: 0.75vw;
+    }
+
     .box {
         width: calc(100% / 2);
+    }
+
+    .ui > * {
+        margin-bottom: 1vw;
+    }
+
+    .btn-refresh {
+        padding: 0;
+        font-size: 2vw;
+        margin-bottom: 1vw;
     }
 
 }

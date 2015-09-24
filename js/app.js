@@ -3,9 +3,10 @@ var boxLabels = document.querySelectorAll('.box-label');
 var inputRGB = document.getElementsByClassName('choice')[0];
 var inputHEX = document.getElementsByClassName('choice')[1];
 var btnType = document.querySelectorAll('.btn-type');
-var btnRefresh = document.querySelectorAll('.btn-refresh');
+var btnRefresh = document.querySelector('.btn-refresh');
 var copyright = document.querySelector('.copyright-js');
 var inputs = document.querySelectorAll('.colorInput');
+var spinner = document.querySelector('.fa-refresh');
 var curType = 'rgb';
 var colors = [];
 var min = 0;
@@ -18,7 +19,7 @@ year = new Date();
 function filterInt(value) {
   if (/^(\-|\+)?([0-9]+|Infinity)$/.test(value))
     return Number(value);
-    return NaN;
+  return NaN;
 }
 
 function refresh(elements, labels, min, max) {
@@ -57,7 +58,7 @@ function refresh(elements, labels, min, max) {
       max = 15;
     } // if chosen maximum is invalid reset the value
   }
-  
+
   colors = rc.newColor(curType, min, max, elements.length); // Generate colors
 
   for (var i = 0; i < elements.length; i++) {    // For each element
@@ -94,19 +95,19 @@ for (var i = 0; i < btnType.length; i++) {
   }, false);
 } // Add event listeners to color type buttons
 
-if (btnRefresh.length === 2) {  // If refresh button exists
-  for (var i = 0; i < btnRefresh.length; i++) {
-    btnRefresh[i].addEventListener('click', function() {
-      'use strict';
-      refresh(boxes, boxLabels, min, max);
-      if (curType === 'rgb') {
-        inputRGB.checked = true;
-      } else if (curType === 'hex') {
-        inputHEX.checked = true;
-      }
-    }, false);
-  }
-} // Add function call to refresh button
+btnRefresh.addEventListener('click', function() {
+    'use strict';
+    refresh(boxes, boxLabels, min, max);
+    if (curType === 'rgb') {
+      inputRGB.checked = true;
+    } else if (curType === 'hex') {
+      inputHEX.checked = true;
+    }
+    spinner.classList.add('spin');
+    window.setTimeout(function() {
+      spinner.classList.remove('spin');
+    }, 400);
+}, false); // Add function call to refresh button
 
 document.onreadystatechange = function() {
   'use strict';
