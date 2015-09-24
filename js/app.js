@@ -106,7 +106,7 @@ btnRefresh.addEventListener('click', function() {
     spinner.classList.add('spin');
     window.setTimeout(function() {
       spinner.classList.remove('spin');
-    }, 400);
+    }, 200);
 }, false); // Add function call to refresh button
 
 document.onreadystatechange = function() {
