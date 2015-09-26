@@ -24,14 +24,14 @@ rc.newColor = function(type, min, max, amount) {
       min = 0;
     }
 
-    if (max === undefined || max > 255 || max < 0 || isNaN(max) || max > min) {
+    if (max === undefined || max > 255 || max < 0 || isNaN(max) || max < min) {
       max = 255;
     }
   } else if (type === 'hex') {
     if (min === undefined || min < 0 || min > 15 || min > max) {
       min = 0;
     }
-    if (max === undefined || max > 15 || max < 0 || max > min) {
+    if (max === undefined || max > 15 || max < 0 || max < min) {
       max = 15;
     }
   } // if min or max are empty or do not fit within boundaries use default

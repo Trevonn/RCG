@@ -270,10 +270,6 @@ input:focus {
         padding: 1vw;
     }
 
-    .ui > * {
-        margin-bottom: 1vw;
-    }
-
     .cont > * {
         padding: 0.75vw;
     }
@@ -281,7 +277,6 @@ input:focus {
     .btn-refresh {
         padding: 0;
         font-size: 2.5vw;
-        margin-bottom: 1vw;
     }
 }
 
@@ -302,14 +297,9 @@ input:focus {
         width: calc(100% / 2);
     }
 
-    .ui > * {
-        margin-bottom: 1vw;
-    }
-
     .btn-refresh {
         padding: 0;
         font-size: 2vw;
-        margin-bottom: 1vw;
     }
 
 }
