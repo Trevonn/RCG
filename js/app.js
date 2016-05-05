@@ -29,9 +29,6 @@ function refresh (elements, labels, min, max) {
     var customRgbMin = filterInt(inputs[0].value)
     var customRgbMax = filterInt(inputs[1].value)
 
-    console.log(customRgbMin)
-    console.log(customRgbMax)
-
     if (customRgbMin < 0 || customRgbMin > 255 || isNaN(customRgbMin)) {
       min = 0
       inputs[0].value = '0'
@@ -44,9 +41,6 @@ function refresh (elements, labels, min, max) {
     } else {
       max = customRgbMax
     } // if chosen maximum is invalid reset the value
-
-    console.log(min)
-    console.log(max)
   } else {
     var customHexMin = rc.hexes.indexOf(inputs[2].value)
     var customHexMax = rc.hexes.indexOf(inputs[3].value)
@@ -123,6 +117,6 @@ document.onreadystatechange = function () {
 
 year = year.getFullYear()
 
-copyright.innerHTML = '&copy; ' + year + ' - Trevonn'
+copyright.innerHTML = '&copy; ' + year + ' Trevonn'
 
 refresh(boxes, boxLabels, min, max) // Initialise
