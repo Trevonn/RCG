@@ -1,5 +1,13 @@
 'use strict' // Strict Mode
 
+// var ui = {}
+// var app = {} // Declare object
+
+// ui.dMin = 0
+// ui.dMax = 255
+// ui.min = 0
+// ui.max = 0
+
 var boxes = document.querySelectorAll('.inner-box')
 var boxLabels = document.querySelectorAll('.box-label')
 var inputRGB = document.getElementsByClassName('choice')[0]
@@ -26,24 +34,26 @@ function filterInt (value) {
 
 function refresh (elements, labels, min, max) {
   if (curType === 'rgb') {
-    var customRgbMin = filterInt(inputs[0].value)
-    var customRgbMax = filterInt(inputs[1].value)
-
+    var customRgbMin = filterInt(inputs[0].value) // RGB Min
+    var customRgbMax = filterInt(inputs[1].value) // RGB Max
+    // Save chosen values to variables
     if (customRgbMin < 0 || customRgbMin > 255 || isNaN(customRgbMin)) {
       min = 0
       inputs[0].value = '0'
     } else {
       min = customRgbMin
-    } // if chosen minimum is invalid reset the value
+    } 
+    // if chosen minimum is invalid reset the input value
     if (customRgbMax < 0 || customRgbMax > 255 || isNaN(customRgbMax)) {
       max = 255
       inputs[1].value = '255'
     } else {
       max = customRgbMax
-    } // if chosen maximum is invalid reset the value
+    } 
+    // if chosen maximum is invalid reset the value
   } else {
-    var customHexMin = rc.hexes.indexOf(inputs[2].value)
-    var customHexMax = rc.hexes.indexOf(inputs[3].value)
+    var customHexMin = rc.hexes.indexOf(inputs[2].value) // Hex Min
+    var customHexMax = rc.hexes.indexOf(inputs[3].value) // Hex Max
 
     if (customHexMin !== -1) {
       min = customHexMin
