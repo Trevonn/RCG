@@ -7,20 +7,26 @@ rc.hexes = '0123456789abcdef'
 rc.newNum = function (min, max) {
   return Math.floor(Math.random() * (max + 1 - min) + min)
 } // Returns a number between a specified minimum and maximum
+  // Example: 88
 
-rc.newColor = function (type, min, max, amount) { 
+rc.newColor = function (type, min, max, amount) {
   // This function generates a random color
   var colors = []
+
+  if (isNaN(amount) === true || amount < 1) {
+    amount = 1;
+  } // if amount argument is not a number default to 1
 
   for (var i = 0; i < amount; i++) {
     var color = []
 
     for (var x = 0; x < 3; x++) {
-      if (type === 'rgb') {
+      if (type === 'rgb') { // Min/Max must be between 0 and 255
+
         color[x] = this.newNum(min, max)
       } // Add new RGB value to array
 
-      if (type === 'hex') {
+      if (type === 'hex') { // Min/Max must be between 0 and 15
         color[x] = this.hexes.charAt(this.newNum(min, max)) +
         this.hexes.charAt(this.newNum(min, max))
       } // Add new hex value to array
@@ -30,7 +36,8 @@ rc.newColor = function (type, min, max, amount) {
     color = [] // Reset color array
   }
   return colors
-}
+} // Returns arrays of 3 sepereated color values
+  // Example: [ "9e", "5b", "54" ] or [ 185, 181, 131 ]
 
 rc.convert = function (type, input) {
   // This function converts a colour from one type to another
@@ -43,11 +50,13 @@ rc.convert = function (type, input) {
         break
 
       case 'hex':
-        color[i] = this.hexes.charAt((input[i] - input[i] % 16) / 16) + this.hexes.charAt(input[i] % 16)
+        color[i] = this.hexes.charAt((input[i] - input[i] % 16) / 16) +
+                   this.hexes.charAt(input[i] % 16)
         break
 
       default:
-        console.log('Function: Convert \nError: color type is invalid. \nTry putting quotes around the string.')
+        console.log('Function: Convert \nError: color type is invalid.');
+        console.log('Try putting quotes around the string.');
         break
     }
   }
