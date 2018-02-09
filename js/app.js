@@ -1,12 +1,12 @@
 'use strict' // Strict Mode
 
-// var ui = {}
-// var app = {} // Declare object
+var ui = {
+  year: new Date()
+}
+var app = {} // Declare object
 
-// ui.dMin = 0
-// ui.dMax = 255
-// ui.min = 0
-// ui.max = 0
+app.min = 0
+app.max = 255
 
 var boxes = document.querySelectorAll('.inner-box')
 var boxLabels = document.querySelectorAll('.box-label')
@@ -19,53 +19,55 @@ var inputs = document.querySelectorAll('.colorInput')
 var spinner = document.querySelector('.fa-refresh')
 var curType = 'rgb'
 var colors = []
-var min = 0
-var max = 255
-var year = new Date()
 
 // Declare varibales
 
-function filterInt(value) {
+app.filterInt = function(value) {
   if (/^(\-|\+)?([0-9]+|Infinity)$/.test(value)) {
     return Number(value)
   }
   return NaN
-}
+} // Grab interger from input
 
-function refresh(elements, labels, min, max) {
+app.refresh = function(elements, labels, min, max) {
   if (curType === 'rgb') {
-    var customRgbMin = filterInt(inputs[0].value) // RGB Min
-    var customRgbMax = filterInt(inputs[1].value) // RGB Max
+    var RgbMin = app.filterInt(inputs[0].value) // RGB Min
+    var RgbMax = app.filterInt(inputs[1].value) // RGB Max
     // Save chosen values to variables
-    if (customRgbMin < 0 || customRgbMin > 255 || isNaN(customRgbMin)) {
-      min = 0
+    if (RgbMin < 0 || RgbMin > 255 || isNaN(RgbMin)) {
+      app.min = 0
       inputs[0].value = '0'
     } else {
-      min = customRgbMin
+      app.min = RgbMin
+      console.log(app.min)
     }
     // if chosen minimum is invalid reset the input value
-    if (customRgbMax < 0 || customRgbMax > 255 || isNaN(customRgbMax)) {
-      max = 255
+    if (RgbMax < 0 || RgbMax > 255 || isNaN(RgbMax)) {
+      app.max = 255
       inputs[1].value = '255'
     } else {
-      max = customRgbMax
+      app.max = RgbMax
+      console.log(app.max)
     }
-  // if chosen maximum is invalid reset the value
+    // if chosen maximum is invalid reset the value
   } else {
-    var customHexMin = rc.hexes.indexOf(inputs[2].value) // Hex Min
-    var customHexMax = rc.hexes.indexOf(inputs[3].value) // Hex Max
-
-    if (customHexMin !== -1) {
-      min = customHexMin
+    var HexMin = rc.hexes.indexOf(inputs[2].value) // Hex Min
+    var HexMax = rc.hexes.indexOf(inputs[3].value) // Hex Max
+    console.log("HexMin: " + HexMin)
+    console.log("HexMax: " + HexMax)
+    if (HexMin !== -1) {
+      app.min = HexMin
+      console.log(app.min)
     } else {
+      app.min = 0
       inputs[2].value = '0'
-      min = 0
     } // if chosen minimum is invalid reset the value
-    if (customHexMax !== -1) {
-      max = customHexMax
+    if (HexMax !== -1) {
+      app.max = HexMax
+      console.log(app.max)
     } else {
+      app.max = 15
       inputs[3].value = 'F'
-      max = 15
     } // if chosen maximum is invalid reset the value
   }
 
@@ -103,7 +105,7 @@ for (var i = 0; i < btnType.length; i++) {
 } // Add event listeners to color type buttons
 
 btnRefresh.addEventListener('click', function() {
-  refresh(boxes, boxLabels, min, max)
+  app.refresh(boxes, boxLabels, app.min, app.max)
   if (curType === 'rgb') {
     inputRGB.checked = true
   } else if (curType === 'hex') {
@@ -125,8 +127,8 @@ document.onreadystatechange = function() {
   }
 }
 
-year = year.getFullYear()
+ui.year = ui.year.getFullYear()
 
-copyright.innerHTML = '&copy; ' + year + ' Trevonn'
+copyright.innerHTML = '&copy; ' + ui.year + ' Trevonn'
 
-refresh(boxes, boxLabels, min, max) // Initialise
+app.refresh(boxes, boxLabels, app.min, app.max) // Initialise
