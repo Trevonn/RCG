@@ -1,132 +1,126 @@
 'use strict' // Strict Mode
 
-// var ui = {}
-// var app = {} // Declare object
+var ui = {
+  boxes: document.querySelectorAll('.inner-box'),
+  boxLabels: document.querySelectorAll('.box-label'),
+  inputRGB: document.getElementsByClassName('choice')[0],
+  inputHEX: document.getElementsByClassName('choice')[1],
+  btnType: document.querySelectorAll('.btn-type'),
+  btnRefresh: document.querySelector('.btn-refresh'),
+  copyright: document.querySelector('.copyright-js'),
+  inputs: document.querySelectorAll('.colorInput'),
+  spinner: document.querySelector('.fa-refresh'),
+  year: new Date(),
+}
 
-// ui.dMin = 0
-// ui.dMax = 255
-// ui.min = 0
-// ui.max = 0
+var app = {
+  min: 0,
+  app: 255,
+  curType: 'rgb',
+  colors: []
+}
 
-var boxes = document.querySelectorAll('.inner-box')
-var boxLabels = document.querySelectorAll('.box-label')
-var inputRGB = document.getElementsByClassName('choice')[0]
-var inputHEX = document.getElementsByClassName('choice')[1]
-var btnType = document.querySelectorAll('.btn-type')
-var btnRefresh = document.querySelector('.btn-refresh')
-var copyright = document.querySelector('.copyright-js')
-var inputs = document.querySelectorAll('.colorInput')
-var spinner = document.querySelector('.fa-refresh')
-var curType = 'rgb'
-var colors = []
-var min = 0
-var max = 255
-var year = new Date()
-
-// Declare varibales
-
-function filterInt(value) {
+app.filterInt = function(value) {
   if (/^(\-|\+)?([0-9]+|Infinity)$/.test(value)) {
     return Number(value)
   }
   return NaN
-}
+} // Grab interger from input
 
-function refresh(elements, labels, min, max) {
-  if (curType === 'rgb') {
-    var customRgbMin = filterInt(inputs[0].value) // RGB Min
-    var customRgbMax = filterInt(inputs[1].value) // RGB Max
+app.refresh = function(elements, labels, min, max) {
+  if (app.curType === 'rgb') {
+    var RgbMin = app.filterInt(ui.inputs[0].value) // RGB Min
+    var RgbMax = app.filterInt(ui.inputs[1].value) // RGB Max
     // Save chosen values to variables
-    if (customRgbMin < 0 || customRgbMin > 255 || isNaN(customRgbMin)) {
-      min = 0
-      inputs[0].value = '0'
+    if (RgbMin < 0 || RgbMin > 255 || isNaN(RgbMin)) {
+      app.min = 0
+      ui.inputs[0].value = '0'
     } else {
-      min = customRgbMin
+      app.min = RgbMin
     }
     // if chosen minimum is invalid reset the input value
-    if (customRgbMax < 0 || customRgbMax > 255 || isNaN(customRgbMax)) {
-      max = 255
-      inputs[1].value = '255'
+    if (RgbMax < 0 || RgbMax > 255 || isNaN(RgbMax)) {
+      app.max = 255
+      ui.inputs[1].value = '255'
     } else {
-      max = customRgbMax
+      app.max = RgbMax
     }
-  // if chosen maximum is invalid reset the value
+    // if chosen maximum is invalid reset the value
   } else {
-    var customHexMin = rc.hexes.indexOf(inputs[2].value) // Hex Min
-    var customHexMax = rc.hexes.indexOf(inputs[3].value) // Hex Max
-
-    if (customHexMin !== -1) {
-      min = customHexMin
+    var HexMin = rc.hexes.indexOf(ui.inputs[2].value) // Hex Min
+    var HexMax = rc.hexes.indexOf(ui.inputs[3].value) // Hex Max
+    if (HexMin !== -1) {
+      app.min = HexMin
     } else {
-      inputs[2].value = '0'
-      min = 0
+      app.min = 0
+      ui.inputs[2].value = '0'
     } // if chosen minimum is invalid reset the value
-    if (customHexMax !== -1) {
-      max = customHexMax
+    if (HexMax !== -1) {
+      app.max = HexMax
     } else {
-      inputs[3].value = 'F'
-      max = 15
+      app.max = 15
+      ui.inputs[3].value = 'f'
     } // if chosen maximum is invalid reset the value
   }
 
-  colors = rc.newColor(curType, min, max, elements.length) // Generate colors
+  app.colors = rc.newColor(app.curType, app.min, app.max, elements.length) // Generate app.colors
 
   for (var i = 0; i < elements.length; i++) { // For each element
-    var color = rc.toText(colors[i], curType) // Assign color to variable
+    var color = rc.toText(app.colors[i], app.curType) // Assign color to variable
     elements[i].style.backgroundColor = color // Change Background color
     labels[i].textContent = color // Change label
   }
 }
 
 function changeType(elements, labels, type1) {
-  if (curType === type1) {
+  if (app.curType === type1) {
     return // Exit if color type is the same
   }
 
   for (var i = 0; i < elements.length; i++) {
-    var converted = rc.convert(type1, colors[i])
+    var converted = rc.convert(type1, app.colors[i])
     // Assign converted color to variable
     var color = rc.toText(converted, type1)
     labels[i].textContent = color
     // Change labels to converted color
-    colors[i] = converted
+    app.colors[i] = converted
   // Replace color in color array with converted color
   }
 
-  curType = type1 // Change current color type
+  app.curType = type1 // Change current color type
 }
 
-for (var i = 0; i < btnType.length; i++) {
-  btnType[i].addEventListener('click', function() {
-    changeType(boxes, boxLabels, this.textContent.toLowerCase())
+for (var i = 0; i < ui.btnType.length; i++) {
+  ui.btnType[i].addEventListener('click', function() {
+    changeType(ui.boxes, ui.boxLabels, this.textContent.toLowerCase())
   }, false)
 } // Add event listeners to color type buttons
 
-btnRefresh.addEventListener('click', function() {
-  refresh(boxes, boxLabels, min, max)
-  if (curType === 'rgb') {
-    inputRGB.checked = true
-  } else if (curType === 'hex') {
-    inputHEX.checked = true
+ui.btnRefresh.addEventListener('click', function() {
+  app.refresh(ui.boxes, ui.boxLabels, app.min, app.max)
+  if (app.curType === 'rgb') {
+    ui.inputRGB.checked = true
+  } else if (app.curType === 'hex') {
+    ui.inputHEX.checked = true
   }
-  spinner.classList.add('spin')
+  ui.spinner.classList.add('spin')
   window.setTimeout(function() {
-    spinner.classList.remove('spin')
+    ui.spinner.classList.remove('spin')
   }, 200)
 }, false) // Add function call to refresh button
 
 document.onreadystatechange = function() {
   if (document.readyState === 'complete') {
-    if (curType === 'rgb') {
-      inputRGB.checked = true
-    } else if (curType === 'hex') {
-      inputHEX.checked = true
+    if (app.curType === 'rgb') {
+      ui.inputRGB.checked = true
+    } else if (app.curType === 'hex') {
+      ui.inputHEX.checked = true
     }
   }
 }
 
-year = year.getFullYear()
+ui.year = ui.year.getFullYear()
 
-copyright.innerHTML = '&copy; ' + year + ' Trevonn'
+ui.copyright.innerHTML = '&copy; ' + ui.year + ' Trevonn'
 
-refresh(boxes, boxLabels, min, max) // Initialise
+app.refresh(ui.boxes, ui.boxLabels, app.min, app.max) // Initialise
